@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  AppUtilityExample
 //
-//  Created by Apple on 05/09/16.
+//  Created by Sunil Sharma on 05/09/16.
 //  Copyright © 2016 Sunil Sharma. All rights reserved.
 //
 
@@ -12,12 +12,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = UIColor.init(redValue: 240, greenValue: 0, blueValue: 60)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
