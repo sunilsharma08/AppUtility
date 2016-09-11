@@ -430,6 +430,7 @@
 				1894E1671D7CACF800F1852A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1894E1681D7CACF800F1852A /* Build configuration list for PBXNativeTarget "AppUtilityExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -438,6 +439,7 @@
 				1894E16A1D7CACF800F1852A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
