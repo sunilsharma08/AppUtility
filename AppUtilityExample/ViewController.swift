@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         auLabelExamples()
         auAlertMessageExamples()
         auTextFieldExample()
+        addInternetCheckButton()
     }
     
     func auColorExamples() {
@@ -59,7 +60,25 @@ class ViewController: UIViewController {
         auTextField.center.x = self.view.center.x
         auTextField.backgroundColor = UIColor.init(hex: 0xffffff)
         self.view.addSubview(auTextField)
-        
+    }
+    
+    func addInternetCheckButton() {
+        let netCheckButton = UIButton.init(type: .Custom)
+        netCheckButton.frame = CGRectMake(0, 300, 200, 40)
+        netCheckButton.center.x = self.view.center.x
+        netCheckButton.setTitle("Check Net Connection", forState: .Normal)
+        netCheckButton.addTarget(self, action: #selector(netCheckButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        self.view.addSubview(netCheckButton)
+    }
+    
+    func netCheckButtonPressed(sender:UIButton) {
+        //Checking internet connection
+        if AUReachability.sharedInstance.isNetworkReachable() {
+            AUAlertMessage().showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
+        }
+        else{
+            AUAlertMessage().showAlertView(nil, message: "Not Connected", cancelButtonTitle: "Cancel")
+        }
     }
     
     override func didReceiveMemoryWarning() {
