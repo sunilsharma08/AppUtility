@@ -11,7 +11,7 @@ import UIKit
 
 public class AUTextFiled: UITextField {
     
-    public var edgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5);
+    public var edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
     
     public override func textRectForBounds(bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, edgeInsets)
