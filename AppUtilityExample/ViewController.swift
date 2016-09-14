@@ -58,6 +58,7 @@ class ViewController: UIViewController {
         auTextField.edgeInsets = UIEdgeInsetsMake(0, 10, 0, 10)
         
         auTextField.center.x = self.view.center.x
+        //Color from hex value
         auTextField.backgroundColor = UIColor.init(hex: 0xffffff)
         self.view.addSubview(auTextField)
     }
