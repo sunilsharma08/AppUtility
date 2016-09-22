@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     
     func auStringExamples() {
         
+        //Use of email Validation extension
         let emailString = "some@example.com"
         if emailString.isValidEmail() {
             print("Acceptable Email id")
@@ -44,7 +45,9 @@ class ViewController: UIViewController {
             print("Non acceptable string")
         }
         
-        
+        //Getting height of string via extension.
+        let someString = "This string will  be used to calculate height of string through extension"
+        print("\(someString.heightWithConstrainedWidth(320, font: UIFont.systemFontOfSize(15)))")
     }
     
     func auColorExamples() {
