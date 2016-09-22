@@ -23,12 +23,28 @@ class ViewController: UIViewController {
     func auStringExamples() {
         
         let emailString = "some@example.com"
-        if emailString.isValidEmail(){
+        if emailString.isValidEmail() {
             print("Acceptable Email id")
         }
         else{
             print("Non acceptable Email id")
         }
+        
+        if emailString.isValidEmail("[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}") {
+            print("Acceptable Email id")
+        }
+        else{
+            print("Non acceptable Email id")
+        }
+        
+        if emailString.validateWithRegexString("^[a-zA-Z0-9]+$") {
+            print("Acceptable String")
+        }
+        else{
+            print("Non acceptable string")
+        }
+        
+        
     }
     
     func auColorExamples() {
