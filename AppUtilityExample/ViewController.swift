@@ -17,6 +17,18 @@ class ViewController: UIViewController {
         auAlertMessageExamples()
         auTextFieldExample()
         addInternetCheckButton()
+        auStringExamples()
+    }
+    
+    func auStringExamples() {
+        
+        let emailString = "some@example.com"
+        if emailString.isValidEmail(){
+            print("Acceptable Email id")
+        }
+        else{
+            print("Non acceptable Email id")
+        }
     }
     
     func auColorExamples() {
