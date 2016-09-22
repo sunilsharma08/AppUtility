@@ -73,6 +73,8 @@ class ViewController: UIViewController {
         //Color from hex value
         auTextField.backgroundColor = UIColor.init(hex: 0xffffff)
         self.view.addSubview(auTextField)
+        
+        auTextField.text = "Teexxt with padding"
     }
     
     func addInternetCheckButton() {
