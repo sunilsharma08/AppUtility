@@ -18,6 +18,24 @@ class ViewController: UIViewController {
         auTextFieldExample()
         addInternetCheckButton()
         auStringExamples()
+        auDateExamples()
+    }
+    
+    func auDateExamples() {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        let date = dateFormatter.dateFromString("11/11/1999")
+        let noOfYear = NSDate().yearsFrom(date!)
+        let noOfMonths = NSDate().monthsFrom(date!)
+        let noOfWeeks = NSDate().weeksFrom(date!)
+        let noOfDays = NSDate().daysFrom(date!)
+        let noOfHours = NSDate().hoursFrom(date!)
+        let noOfMin = NSDate().minutesFrom(date!)
+        let noOfSec = NSDate().secondsFrom(date!)
+        
+        let dateOffsets = NSDate().offsetFrom(date!)
+        
+        print("Number of years - \(noOfYear) \n Number of months - \(noOfMonths) \n Number of weeks - \(noOfWeeks) \n Number of days - \(noOfDays) \n Number of Hours \(noOfHours) \n Number of Minutes \(noOfMin) \n number of Seconds \(noOfSec) \n Date Offsets - \(dateOffsets)")
         
     }
     
