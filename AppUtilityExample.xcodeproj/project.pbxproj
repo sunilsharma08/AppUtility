@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1886372B1D9AA35000532D96 /* AUDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1886372A1D9AA35000532D96 /* AUDate.swift */; };
 		1894E14C1D7CACF800F1852A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E14B1D7CACF800F1852A /* AppDelegate.swift */; };
 		1894E14E1D7CACF800F1852A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E14D1D7CACF800F1852A /* ViewController.swift */; };
 		1894E1511D7CACF800F1852A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1894E14F1D7CACF800F1852A /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1886372A1D9AA35000532D96 /* AUDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUDate.swift; sourceTree = "<group>"; };
 		1894E1481D7CACF800F1852A /* AppUtilityExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppUtilityExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1894E14B1D7CACF800F1852A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1894E14D1D7CACF800F1852A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				1894E1711D7CAD7500F1852A /* AUString.swift */,
 				1894E1721D7CAD7500F1852A /* AUTextField.swift */,
 				1894E1731D7CAD7500F1852A /* Reachability.swift */,
+				1886372A1D9AA35000532D96 /* AUDate.swift */,
 			);
 			path = AppUtility;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				1894E17A1D7CAD7500F1852A /* AUTextField.swift in Sources */,
 				1894E14E1D7CACF800F1852A /* ViewController.swift in Sources */,
 				1894E1791D7CAD7500F1852A /* AUString.swift in Sources */,
+				1886372B1D9AA35000532D96 /* AUDate.swift in Sources */,
 				1894E17B1D7CAD7500F1852A /* Reachability.swift in Sources */,
 				1894E14C1D7CACF800F1852A /* AppDelegate.swift in Sources */,
 			);

@@ -18,6 +18,7 @@ class ViewController: UIViewController {
         auTextFieldExample()
         addInternetCheckButton()
         auStringExamples()
+        
     }
     
     func auStringExamples() {
