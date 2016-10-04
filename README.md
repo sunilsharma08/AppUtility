@@ -21,3 +21,6 @@ Feel free to add code which you think is necessary in almost every project.
 
 # License
 AppUtility is available under the [MIT License](https://raw.githubusercontent.com/sunilsharma08/AppUtility/master/License).
+
+# Authors
+Sunil Sharma <sunilsharma.ss08@gmail.com>
