@@ -1,5 +1,5 @@
 # AppUtility
-AppUtility is a library which contains small code snippets that we need in almost every project like converting color hex to rgb, checking internet connectivity, etc.
+AppUtility is a library which contains small code snippets that we need in almost every project such as converting color hex to rgb or checking internet connectivity. Indeed, this library is very useful! :-)
 
 #Installation
 Just drag the folder "AppUtility" with the source files into your project.
