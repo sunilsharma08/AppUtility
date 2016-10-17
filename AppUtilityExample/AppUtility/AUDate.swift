@@ -37,13 +37,20 @@ extension NSDate {
     
     func offsetFrom(fromdate: NSDate = NSDate(), toDate date:NSDate) -> String {
         
-        if yearsFrom(fromdate, toDate: date)   != 0 { return "\(yearsFrom(fromdate, toDate: date))y"   }
-        if monthsFrom(fromdate, toDate: date)  != 0 { return "\(monthsFrom(fromdate, toDate: date))M"  }
-        if weeksFrom(fromdate, toDate: date)   != 0 { return "\(weeksFrom(fromdate, toDate: date))w"   }
-        if daysFrom(fromdate, toDate: date)    != 0 { return "\(daysFrom(fromdate, toDate: date))d"    }
-        if hoursFrom(fromdate, toDate: date)   != 0 { return "\(hoursFrom(fromdate, toDate: date))h"   }
-        if minutesFrom(fromdate, toDate: date) != 0 { return "\(minutesFrom(fromdate, toDate: date))m" }
-        if secondsFrom(fromdate, toDate: date) != 0 { return "\(secondsFrom(fromdate, toDate: date))s" }
+        if yearsFrom(fromdate, toDate: date)   > 0 { return "\(yearsFrom(fromdate, toDate: date))y"   }
+        else if yearsFrom(fromdate, toDate: date)   < 0 { return "\(abs(yearsFrom(fromdate, toDate: date)))y ago"   }
+        if monthsFrom(fromdate, toDate: date)  > 0 { return "\(monthsFrom(fromdate, toDate: date))M"  }
+        else if monthsFrom(fromdate, toDate: date)  < 0 { return "\(abs(monthsFrom(fromdate, toDate: date)))M ago"  }
+        if weeksFrom(fromdate, toDate: date)   > 0 { return "\(weeksFrom(fromdate, toDate: date))w"   }
+        else if weeksFrom(fromdate, toDate: date)   < 0 { return "\(abs(weeksFrom(fromdate, toDate: date)))w ago"   }
+        if daysFrom(fromdate, toDate: date)    > 0 { return "\(daysFrom(fromdate, toDate: date))d"    }
+        else if daysFrom(fromdate, toDate: date)    < 0 { return "\(abs(daysFrom(fromdate, toDate: date)))d ago"    }
+        if hoursFrom(fromdate, toDate: date)   > 0 { return "\(hoursFrom(fromdate, toDate: date))h"   }
+        else if hoursFrom(fromdate, toDate: date)   < 0 { return "\(abs(hoursFrom(fromdate, toDate: date)))h ago"   }
+        if minutesFrom(fromdate, toDate: date) > 0 { return "\(minutesFrom(fromdate, toDate: date))m" }
+        else if minutesFrom(fromdate, toDate: date) < 0 { return "\(abs(minutesFrom(fromdate, toDate: date)))m ago" }
+        if secondsFrom(fromdate, toDate: date) > 0 { return "\(secondsFrom(fromdate, toDate: date))s" }
+        else if secondsFrom(fromdate, toDate: date) < 0 { return "\(abs(secondsFrom(fromdate, toDate: date)))s ago" }
         return ""
     }
 }
