@@ -24,18 +24,18 @@ class ViewController: UIViewController {
     func auDateExamples() {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        let date = dateFormatter.dateFromString("11/11/1999")
-        let noOfYear = NSDate().yearsFrom(date!)
-        let noOfMonths = NSDate().monthsFrom(date!)
-        let noOfWeeks = NSDate().weeksFrom(date!)
-        let noOfDays = NSDate().daysFrom(date!)
-        let noOfHours = NSDate().hoursFrom(date!)
-        let noOfMin = NSDate().minutesFrom(date!)
-        let noOfSec = NSDate().secondsFrom(date!)
+        let date = dateFormatter.dateFromString("11/12/2016")
+        let noOfYear = NSDate().yearsFrom(toDate: date!)
+        let noOfMonths = NSDate().monthsFrom(toDate: date!)
+        let noOfWeeks = NSDate().weeksFrom(toDate: date!)
+        let noOfDays = NSDate().daysFrom(toDate: date!)
+        let noOfHours = NSDate().hoursFrom(toDate: date!)
+        let noOfMin = NSDate().minutesFrom(toDate: date!)
+        let noOfSec = NSDate().secondsFrom(toDate: date!)
         
-        let dateOffsets = NSDate().offsetFrom(date!)
+        let dateOffsets = NSDate().offsetFrom(toDate: date!)
         
-        print("Number of years - \(noOfYear) \n Number of months - \(noOfMonths) \n Number of weeks - \(noOfWeeks) \n Number of days - \(noOfDays) \n Number of Hours \(noOfHours) \n Number of Minutes \(noOfMin) \n number of Seconds \(noOfSec) \n Date Offsets - \(dateOffsets)")
+        print("Number of years - \(noOfYear) \nNumber of months - \(noOfMonths) \nNumber of weeks - \(noOfWeeks) \nNumber of days - \(noOfDays) \nNumber of Hours \(noOfHours) \nNumber of Minutes \(noOfMin) \nNumber of Seconds \(noOfSec) \nDate Offsets - \(dateOffsets)")
         
     }
     
