@@ -22,6 +22,7 @@
 		1894E1791D7CAD7500F1852A /* AUString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1711D7CAD7500F1852A /* AUString.swift */; };
 		1894E17A1D7CAD7500F1852A /* AUTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1721D7CAD7500F1852A /* AUTextField.swift */; };
 		1894E17B1D7CAD7500F1852A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1731D7CAD7500F1852A /* Reachability.swift */; };
+		18F6C1FF1DBE12CA00AA964C /* AUImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6C1FE1DBE12CA00AA964C /* AUImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		1894E1711D7CAD7500F1852A /* AUString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUString.swift; sourceTree = "<group>"; };
 		1894E1721D7CAD7500F1852A /* AUTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUTextField.swift; sourceTree = "<group>"; };
 		1894E1731D7CAD7500F1852A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		18F6C1FE1DBE12CA00AA964C /* AUImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				1894E1721D7CAD7500F1852A /* AUTextField.swift */,
 				1894E1731D7CAD7500F1852A /* Reachability.swift */,
 				1886372A1D9AA35000532D96 /* AUDate.swift */,
+				18F6C1FE1DBE12CA00AA964C /* AUImageView.swift */,
 			);
 			path = AppUtility;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				1894E1741D7CAD7500F1852A /* AUAlertMessage.swift in Sources */,
 				1894E1771D7CAD7500F1852A /* AULabel.swift in Sources */,
 				1894E1781D7CAD7500F1852A /* AUReachability.swift in Sources */,
+				18F6C1FF1DBE12CA00AA964C /* AUImageView.swift in Sources */,
 				1894E1751D7CAD7500F1852A /* AUColor.swift in Sources */,
 				1894E17A1D7CAD7500F1852A /* AUTextField.swift in Sources */,
 				1894E14E1D7CACF800F1852A /* ViewController.swift in Sources */,

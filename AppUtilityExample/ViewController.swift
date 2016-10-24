@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     func auDateExamples() {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        let date = dateFormatter.dateFromString("11/10/2016")
+        let date = dateFormatter.dateFromString("11/10/2000")
         let currentDate = NSDate()
         let noOfYear = currentDate.yearsFrom(toDate: date!)
         let noOfMonths = currentDate.monthsFrom(toDate: date!)
