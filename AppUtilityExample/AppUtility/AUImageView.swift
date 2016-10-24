@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIImageView {
-    public func imageWithURL(urlString: String,withLoadingIndictor enable:Bool = true, completionHandler:(isSuccess: Bool) -> ()) {
+    public func imageWithURL(urlString: String,withLoadingIndictor enable:Bool = true, completionHandler:((isSuccess: Bool) -> ())?) {
         let indicatorView = UIActivityIndicatorView.init(activityIndicatorStyle: .Gray)
         self.addSubview(indicatorView)
         indicatorView.center = CGPointMake(self.bounds.size.width  / 2,
@@ -20,12 +20,12 @@ extension UIImageView {
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 indicatorView.removeFromSuperview()
                 if error != nil {
-                    completionHandler(isSuccess: false)
+                    completionHandler?(isSuccess: false)
                     return
                 }
                 let image = UIImage(data: data ?? NSData())
                 self?.image = image
-                completionHandler(isSuccess: true)
+                completionHandler?(isSuccess: true)
             })
         }).resume()
     }
