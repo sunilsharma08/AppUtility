@@ -1,10 +1,10 @@
 # AppUtility
 AppUtility is a library which contains small code snippets that we need in almost every project like converting color hex to rgb, checking internet connectivity, etc.
 
-#Installation
+# Installation
 Just drag the folder "AppUtility" with the source files into your project.
 
-#Usage
+# Usage
 ```Swift
 //Using direct RGB value no need to divide every time with 255.0
 UIColor.init(redValue: 199, greenValue: 165, blueValue: 247)
@@ -16,8 +16,11 @@ UIColor.init(hex: 0xffffff)
 AUAlertMessage().showAlertView("Title", message: "Message", cancelButtonTitle: "Cancel")
 ```
 
-#Contribution
-Feel free to add code which you think is necessary in almost every project. 
+# Contribution
+Feel free to add code which you think is necessary in almost every project.
 
-#License
+# License
 AppUtility is available under the [MIT License](https://raw.githubusercontent.com/sunilsharma08/AppUtility/master/License).
+
+# Authors
+Sunil Sharma <sunilsharma.ss08@gmail.com>
