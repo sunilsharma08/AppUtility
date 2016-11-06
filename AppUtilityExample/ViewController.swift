@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     }
     
     func auImageViewExamples() {
-        let imageview = UIImageView.init(frame: CGRectMake(20, 350, 320, 200))
+        let imageview = UIImageView.init(frame: CGRectMake(20, 350, 280, 200))
         imageview.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(imageview)
         imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", completionHandler: nil)

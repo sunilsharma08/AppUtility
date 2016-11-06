@@ -15,9 +15,10 @@ extension UIImageView {
         indicatorView.center = CGPointMake(self.bounds.size.width  / 2,
                                            self.bounds.size.height / 2);
         indicatorView.startAnimating()
-        
+        indicatorView.hidesWhenStopped = true
         NSURLSession.sharedSession().dataTaskWithURL(NSURL(string: urlString)!, completionHandler: {[weak self] (data, response, error) -> Void in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                indicatorView.stopAnimating()
                 indicatorView.removeFromSuperview()
                 if error != nil {
                     completionHandler?(isSuccess: false)
