@@ -27,6 +27,34 @@ UIColor.init(hexCode: "#ff0000")
 UIColor.init(hexCode: "#f00")
 ```
 
+## NSDate Utility
+```Swift
+//Getting no. of years between two dates
+let noOfYear = NSDate().yearsFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+
+//Getting no. of months between two dates
+let noOfMonths = NSDate().monthsFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+
+//Getting no. of weeks between two dates
+let noOfWeeks = NSDate().weeksFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+
+//Getting no. of days between two dates
+let noOfDays = NSDate().daysFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+
+//Getting no. of hours between two dates
+let noOfHours = NSDate().hoursFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+
+//Getting no. of minutes between two dates
+let noOfMin = NSDate().minutesFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+
+//Getting no. of seconds between two dates
+let noOfSec = NSDate().secondsFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+
+Getting no. of time between two dates e.g- 2s ago, 1M ago, etc.
+let dateOffsets = NSDate().offsetFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+
+```
+
 ## Alert messages
 ```Swift
 //Display alert view
