@@ -21,6 +21,22 @@ extension UIImage {
         return image
     }
     
+    public class func imageWithGradient(colors: [CGColor], size: CGSize, verticalGradient:Bool = false) -> UIImage {
+        let gradientLayer = CAGradientLayer()
+        let rect: CGRect = CGRectMake(0, 0, size.width, size.height)
+        gradientLayer.frame = rect
+        gradientLayer.colors = colors
+        if verticalGradient {
+            gradientLayer.startPoint = CGPointMake(0.0, size.height/CGFloat(colors.count))
+            gradientLayer.endPoint = CGPointMake(1.0, size.height/CGFloat(colors.count))
+        }
+        UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+        gradientLayer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
     public func fixOrientation() -> UIImage {
         
         // No-op if the orientation is already correct
