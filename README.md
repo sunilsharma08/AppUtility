@@ -52,9 +52,28 @@ let noOfSec = NSDate().secondsFrom(NSDate.init(timeIntervalSince1970: 3000000000
 
 Getting no. of time between two dates e.g- 2s ago, 1M ago, etc.
 let dateOffsets = NSDate().offsetFrom(NSDate.init(timeIntervalSince1970: 3000000000))
-
 ```
 
+## UIImage Utility
+```Swift
+//Create a image of specified color and size
+let image = UIImage.imageWithColor(UIColor.redColor(), size: CGSizeMake(100, 100))
+
+//Create horizontal gradient color image
+let image = UIImage.imageWithGradient([UIColor.redColor().CGColor,UIColor.yellowColor().CGColor], size: CGSizeMake(560, 400))
+
+//Create vertical gradient color image
+let image = UIImage.imageWithGradient([UIColor.redColor().CGColor,UIColor.yellowColor().CGColor], size: CGSizeMake(560, 400), verticalGradient: true)
+
+//Resizing image while maintaing aspect ratio
+let resizedImage:UIImage = image?.resizeImage(CGSizeMake(200, 200))
+
+//Compress image size(compression should be between 0.0 - 1.0)
+let compressedImage:UIImage = image?.compressImage(0.5)
+
+//Fix for rotating image when using imagePicker
+let fixImage:UIImage = image?.fixOrientation()
+```
 ## Alert messages
 ```Swift
 //Display alert view
