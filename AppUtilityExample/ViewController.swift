@@ -32,17 +32,17 @@ class ViewController: UIViewController {
     func auDateExamples() {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        let date = dateFormatter.dateFromString("11/10/2000")
+        let date = dateFormatter.dateFromString("11/10/2020")
         let currentDate = NSDate()
-        let noOfYear = currentDate.yearsFrom(toDate: date!)
-        let noOfMonths = currentDate.monthsFrom(toDate: date!)
-        let noOfWeeks = currentDate.weeksFrom(toDate: date!)
-        let noOfDays = currentDate.daysFrom(toDate: date!)
-        let noOfHours = currentDate.hoursFrom(toDate: date!)
-        let noOfMin = currentDate.minutesFrom(toDate: date!)
-        let noOfSec = currentDate.secondsFrom(toDate: date!)
+        let noOfYear = currentDate.yearsFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+        let noOfMonths = currentDate.monthsFrom(date!)
+        let noOfWeeks = currentDate.weeksFrom(date!)
+        let noOfDays = currentDate.daysFrom(date!)
+        let noOfHours = currentDate.hoursFrom(date!)
+        let noOfMin = currentDate.minutesFrom(date!)
+        let noOfSec = currentDate.secondsFrom(date!)
 
-        let dateOffsets = NSDate().offsetFrom(toDate: date!)
+        let dateOffsets = NSDate().offsetFrom(date!)
 
         print("Number of years - \(noOfYear) \nNumber of months - \(noOfMonths) \nNumber of weeks - \(noOfWeeks) \nNumber of days - \(noOfDays) \nNumber of Hours \(noOfHours) \nNumber of Minutes \(noOfMin) \nNumber of Seconds \(noOfSec) \nDate Offsets - \(dateOffsets)")
 
@@ -78,6 +78,8 @@ class ViewController: UIViewController {
     func auColorExamples() {
         //Use Color RGB Value
         self.view.backgroundColor = UIColor.init(redValue: 199, greenValue: 165, blueValue: 247)
+        //self.view.backgroundColor = UIColor.init(hex:0xff0000, alpha:0.8)
+        //self.view.backgroundColor = UIColor.init(hexCode: "#ff0000")
     }
 
     func auLabelExamples() {
