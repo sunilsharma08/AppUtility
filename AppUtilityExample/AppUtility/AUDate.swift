@@ -8,34 +8,34 @@
 
 import UIKit
 
-extension NSDate {
+extension Date {
     
-    func yearsFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Year, fromDate: self, toDate: date, options: []).year
-    }
-    
-    func monthsFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Month, fromDate: self, toDate: date, options: []).month
+    func yearsFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.year, from: self, to: date, options: []).year!
     }
     
-    func weeksFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.WeekOfYear, fromDate: self, toDate: date, options: []).weekOfYear
+    func monthsFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.month, from: self, to: date, options: []).month!
     }
     
-    func daysFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Day, fromDate: self, toDate: date, options: []).day
-    }
-    func hoursFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Hour, fromDate: self, toDate: date, options: []).hour
-    }
-    func minutesFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Minute, fromDate: self, toDate: date, options: []).minute
-    }
-    func secondsFrom(date: NSDate) -> Int {
-        return NSCalendar.currentCalendar().components(.Second, fromDate: self, toDate: date, options: []).second
+    func weeksFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.weekOfYear, from: self, to: date, options: []).weekOfYear!
     }
     
-    func offsetFrom(date:NSDate) -> String {
+    func daysFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.day, from: self, to: date, options: []).day!
+    }
+    func hoursFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.hour, from: self, to: date, options: []).hour!
+    }
+    func minutesFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.minute, from: self, to: date, options: []).minute!
+    }
+    func secondsFrom(_ date: Date) -> Int {
+        return (Calendar.current as NSCalendar).components(.second, from: self, to: date, options: []).second!
+    }
+    
+    func offsetFrom(_ date:Date) -> String {
         
         if yearsFrom(date)   > 0 {
             return "\(yearsFrom(date))y"
@@ -83,7 +83,7 @@ extension NSDate {
     }
 }
 
-public class AUDate: NSDate {
+open class AUDate: NSDate {
     
 
 }

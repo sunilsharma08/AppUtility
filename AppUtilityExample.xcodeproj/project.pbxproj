@@ -21,7 +21,6 @@
 		1894E1781D7CAD7500F1852A /* AUReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1701D7CAD7500F1852A /* AUReachability.swift */; };
 		1894E1791D7CAD7500F1852A /* AUString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1711D7CAD7500F1852A /* AUString.swift */; };
 		1894E17A1D7CAD7500F1852A /* AUTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1721D7CAD7500F1852A /* AUTextField.swift */; };
-		1894E17B1D7CAD7500F1852A /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1731D7CAD7500F1852A /* Reachability.swift */; };
 		18F6C1FF1DBE12CA00AA964C /* AUImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6C1FE1DBE12CA00AA964C /* AUImageView.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +53,6 @@
 		1894E1701D7CAD7500F1852A /* AUReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUReachability.swift; sourceTree = "<group>"; };
 		1894E1711D7CAD7500F1852A /* AUString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUString.swift; sourceTree = "<group>"; };
 		1894E1721D7CAD7500F1852A /* AUTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUTextField.swift; sourceTree = "<group>"; };
-		1894E1731D7CAD7500F1852A /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		18F6C1FE1DBE12CA00AA964C /* AUImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,7 +125,6 @@
 				1894E1701D7CAD7500F1852A /* AUReachability.swift */,
 				1894E1711D7CAD7500F1852A /* AUString.swift */,
 				1894E1721D7CAD7500F1852A /* AUTextField.swift */,
-				1894E1731D7CAD7500F1852A /* Reachability.swift */,
 				1886372A1D9AA35000532D96 /* AUDate.swift */,
 				18F6C1FE1DBE12CA00AA964C /* AUImageView.swift */,
 			);
@@ -179,14 +176,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Sunil Sharma";
 				TargetAttributes = {
 					1894E1471D7CACF800F1852A = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 9V7MYB9CK7;
+						LastSwiftMigration = 0810;
+						ProvisioningStyle = Automatic;
 					};
 					1894E15B1D7CACF800F1852A = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0810;
 						TestTargetID = 1894E1471D7CACF800F1852A;
 					};
 				};
@@ -245,7 +246,6 @@
 				1894E14E1D7CACF800F1852A /* ViewController.swift in Sources */,
 				1894E1791D7CAD7500F1852A /* AUString.swift in Sources */,
 				1886372B1D9AA35000532D96 /* AUDate.swift in Sources */,
-				1894E17B1D7CAD7500F1852A /* Reachability.swift in Sources */,
 				1894E14C1D7CACF800F1852A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,8 +302,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -348,8 +350,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -368,6 +372,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -377,10 +382,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9V7MYB9CK7;
 				INFOPLIST_FILE = AppUtilityExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunilsharma.AppUtilityExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -388,10 +396,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9V7MYB9CK7;
 				INFOPLIST_FILE = AppUtilityExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunilsharma.AppUtilityExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -403,6 +414,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunilsharma.AppUtilityExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppUtilityExample.app/AppUtilityExample";
 			};
 			name = Debug;
@@ -415,6 +427,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunilsharma.AppUtilityExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppUtilityExample.app/AppUtilityExample";
 			};
 			name = Release;

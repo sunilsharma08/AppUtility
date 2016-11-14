@@ -26,9 +26,9 @@ extension UIColor {
     
     //Creating UIColor from hex string value
     public convenience init(hexCode: String) {
-        let hex = hexCode.stringByTrimmingCharactersInSet(NSCharacterSet.alphanumericCharacterSet().invertedSet)
+        let hex = hexCode.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int = UInt32()
-        NSScanner(string: hex).scanHexInt(&int)
+        Scanner(string: hex).scanHexInt32(&int)
         let a, r, g, b: UInt32
         switch hex.characters.count {
         case 3:

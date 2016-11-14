@@ -23,18 +23,18 @@ class ViewController: UIViewController {
     }
     
     func auImageViewExamples() {
-        let imageview = UIImageView.init(frame: CGRectMake(20, 350, self.view.frame.size.width - 40, 200))
-        imageview.backgroundColor = UIColor.whiteColor()
+        let imageview = UIImageView.init(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
+        imageview.backgroundColor = UIColor.white
         self.view.addSubview(imageview)
         imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", completionHandler: nil)
     }
 
     func auDateExamples() {
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        let date = dateFormatter.dateFromString("11/10/2020")
-        let currentDate = NSDate()
-        let noOfYear = currentDate.yearsFrom(NSDate.init(timeIntervalSince1970: 3000000000))
+        let date = dateFormatter.date(from: "11/10/2020")
+        let currentDate = Date()
+        let noOfYear = currentDate.yearsFrom(Date.init(timeIntervalSince1970: 3000000000))
         let noOfMonths = currentDate.monthsFrom(date!)
         let noOfWeeks = currentDate.weeksFrom(date!)
         let noOfDays = currentDate.daysFrom(date!)
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         let noOfMin = currentDate.minutesFrom(date!)
         let noOfSec = currentDate.secondsFrom(date!)
 
-        let dateOffsets = NSDate().offsetFrom(date!)
+        let dateOffsets = Date().offsetFrom(date!)
 
         print("Number of years - \(noOfYear) \nNumber of months - \(noOfMonths) \nNumber of weeks - \(noOfWeeks) \nNumber of days - \(noOfDays) \nNumber of Hours \(noOfHours) \nNumber of Minutes \(noOfMin) \nNumber of Seconds \(noOfSec) \nDate Offsets - \(dateOffsets)")
 
@@ -72,7 +72,7 @@ class ViewController: UIViewController {
 
         //Getting height of string via extension.
         let someString = "This string will  be used to calculate height of string through extension"
-        print("\(someString.heightWithConstrainedWidth(320, font: UIFont.systemFontOfSize(15)))")
+        print("\(someString.heightWithConstrainedWidth(320, font: UIFont.systemFont(ofSize: 15)))")
     }
 
     func auColorExamples() {
@@ -97,18 +97,21 @@ class ViewController: UIViewController {
     }
 
     func auAlertMessageExamples() {
-        let showAlertButton = UIButton.init(type: .Custom)
+        let showAlertButton = UIButton.init(type: .custom)
         showAlertButton.frame = CGRect(x: 0, y: 100, width: 150, height: 50)
         showAlertButton.center.x = self.view.center.x
-        showAlertButton.setTitle("Show Alert", forState: .Normal)
-        showAlertButton.addTarget(self, action: #selector(showAlertButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        showAlertButton.setTitle("Show Alert", for: UIControlState())
+        showAlertButton.addTarget(self, action: #selector(showAlertButtonPressed(_:)), for: .touchUpInside)
         self.view.addSubview(showAlertButton)
     }
 
-    func showAlertButtonPressed(sender: UIButton) {
+    func showAlertButtonPressed(_ sender: UIButton) {
         //Showing AUAlertMessage
         //AUAlertMessage().showAlertView("Title", message: "Some Message", cancelButtonTitle: "Cancel")
-        AUAlertMessage().setupAlertView()
+        let aumessage = AUAlertMessage()
+        aumessage.setupAlertView()
+        aumessage.show()
+        
     }
 
     func auTextFieldExample() {
@@ -125,15 +128,15 @@ class ViewController: UIViewController {
     }
 
     func addInternetCheckButton() {
-        let netCheckButton = UIButton.init(type: .Custom)
+        let netCheckButton = UIButton.init(type: .custom)
         netCheckButton.frame = CGRect(x: 0, y: 300, width: 200, height: 40)
         netCheckButton.center.x = self.view.center.x
-        netCheckButton.setTitle("Check Net Connection", forState: .Normal)
-        netCheckButton.addTarget(self, action: #selector(netCheckButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        netCheckButton.setTitle("Check Net Connection", for: UIControlState())
+        netCheckButton.addTarget(self, action: #selector(netCheckButtonPressed(_:)), for: .touchUpInside)
         self.view.addSubview(netCheckButton)
     }
 
-    func netCheckButtonPressed(sender: UIButton) {
+    func netCheckButtonPressed(_ sender: UIButton) {
         //Checking internet connection
         if AUReachability.sharedInstance.isNetworkReachable() {
             AUAlertMessage().showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")

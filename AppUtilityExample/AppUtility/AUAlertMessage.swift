@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 extension UIApplication {
-    class func topViewController(base: UIViewController? = UIApplication.sharedApplication().keyWindow?.rootViewController) -> UIViewController? {
+    class func topViewController(_ base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {
             return topViewController(nav.visibleViewController)
         }
@@ -26,16 +26,16 @@ extension UIApplication {
     }
 }
 
-public class AUAlertMessage: UIView {
+open class AUAlertMessage: UIView {
     
-    public var animationDuration:Double = 0.4
+    open var animationDuration:Double = 0.4
     
     let backgroundView = UIView()
     let alertView = UIView()
     var animator:UIDynamicAnimator? = nil
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         initialSetup()
     }
     
@@ -50,32 +50,32 @@ public class AUAlertMessage: UIView {
         initialSetup()
     }
     
-    private func initialSetup(){
+    fileprivate func initialSetup(){
         self.animator = UIDynamicAnimator.init(referenceView: self)
     }
     
-    public func showAlertView(title:String?, message:String?, cancelButtonTitle:String?) {
+    open func showAlertView(_ title:String?, message:String?, cancelButtonTitle:String?) {
         let alert = UIAlertView.init(title: title, message: message, delegate: nil, cancelButtonTitle: cancelButtonTitle)
         alert.show()
     }
     
-    public func setupAlertView() {
+    open func setupAlertView() {
         
-        let keyWindow = UIApplication.sharedApplication().keyWindow
-        backgroundView.frame = keyWindow?.bounds ?? CGRectZero
+        let keyWindow = UIApplication.shared.keyWindow
+        backgroundView.frame = keyWindow?.bounds ?? CGRect.zero
         
         backgroundView.backgroundColor = UIColor.init(white: 0.0, alpha: 0.4)
         backgroundView.alpha = 0.0
         self.addSubview(backgroundView)
         
-        alertView.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width - 40, 100)
-        alertView.backgroundColor = UIColor.whiteColor()
+        alertView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width - 40, height: 100)
+        alertView.backgroundColor = UIColor.white
         alertView.layer.cornerRadius = 11.0
         alertView.layer.masksToBounds = true
-        alertView.tintAdjustmentMode = .Normal
+        alertView.tintAdjustmentMode = .normal
         
         let innerView = UIView.init(frame: alertView.frame)
-        innerView.backgroundColor = UIColor.clearColor()
+        innerView.backgroundColor = UIColor.clear
         
         alertView.addSubview(innerView)
         self.addSubview(alertView)
@@ -83,39 +83,39 @@ public class AUAlertMessage: UIView {
     }
     
     func show() {
-        let keyWindow = UIApplication.sharedApplication().keyWindow
+        let keyWindow = UIApplication.shared.keyWindow
         
         keyWindow?.addSubview(self)
         
-        UIView.animateWithDuration(animationDuration) {
+        UIView.animate(withDuration: animationDuration, animations: {
             self.backgroundView.alpha = 1.0
-        }
+        }) 
         
-        let snapBehaviour = UISnapBehavior.init(item: self.alertView, snapToPoint: (keyWindow?.center)!)
+        let snapBehaviour = UISnapBehavior.init(item: self.alertView, snapTo: (keyWindow?.center)!)
         snapBehaviour.damping = 0.65
         self.animator?.addBehavior(snapBehaviour)
         
     }
     
     func dismiss() {
-        let keyWindow = UIApplication.sharedApplication().keyWindow
+        let keyWindow = UIApplication.shared.keyWindow
         self.animator?.removeAllBehaviors()
         
         let gravityBehaviour = UIGravityBehavior.init(items: [self.alertView])
-        gravityBehaviour.gravityDirection = CGVectorMake(0, 10)
+        gravityBehaviour.gravityDirection = CGVector(dx: 0, dy: 10)
         self.animator?.addBehavior(gravityBehaviour)
 
         let itemBehaviour = UIDynamicItemBehavior.init(items: [self.alertView])
-        itemBehaviour.addAngularVelocity(CGFloat(-M_PI_2), forItem: self.alertView)
+        itemBehaviour.addAngularVelocity(CGFloat(-M_PI_2), for: self.alertView)
         self.animator?.addBehavior(itemBehaviour)
         
-        UIView.animateWithDuration(animationDuration, animations: {[weak self] in
+        UIView.animate(withDuration: animationDuration, animations: {[weak self] in
             self?.backgroundView.alpha = 0.0
-            keyWindow?.tintAdjustmentMode = .Automatic
+            keyWindow?.tintAdjustmentMode = .automatic
             keyWindow?.tintColorDidChange()
-            }) {[weak self] (finished) in
+            }, completion: {[weak self] (finished) in
                 self?.removeFromSuperview()
-        }
+        }) 
         
     }
     
