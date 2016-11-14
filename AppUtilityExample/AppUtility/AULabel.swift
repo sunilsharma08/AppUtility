@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-public class AULabel: UILabel {
-    public var edgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
+open class AULabel: UILabel {
+    open var edgeInsets = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
     
-    override public func drawTextInRect(rect: CGRect) {
-        super.drawTextInRect(UIEdgeInsetsInsetRect(rect, edgeInsets))
+    override open func drawText(in rect: CGRect) {
+        super.drawText(in: UIEdgeInsetsInsetRect(rect, edgeInsets))
     }
 }

@@ -11,13 +11,13 @@ import UIKit
 
 extension String {
     
-    public func heightWithConstrainedWidth(width: CGFloat, font: UIFont, options: NSStringDrawingOptions = [.UsesLineFragmentOrigin, .UsesFontLeading]) -> CGFloat {
-        let constraintRect = CGSize(width: width, height: CGFloat.max)
-        let boundingBox = self.boundingRectWithSize(constraintRect, options: options, attributes: [NSFontAttributeName: font], context: nil)
+    public func heightWithConstrainedWidth(_ width: CGFloat, font: UIFont, options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: options, attributes: [NSFontAttributeName: font], context: nil)
         return boundingBox.height
     }
     
-    public func isValidEmail(regexString:String = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" +
+    public func isValidEmail(_ regexString:String = "(?:[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[\\p{L}0-9!#$%\\&'*+/=?\\^_`{|}" +
         "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\" +
         "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[\\p{L}0-9](?:[a-" +
         "z0-9-]*[\\p{L}0-9])?\\.)+[\\p{L}0-9](?:[\\p{L}0-9-]*[\\p{L}0-9])?|\\[(?:(?:25[0-5" +
@@ -28,9 +28,9 @@ extension String {
         return validateWithRegexString(regexString)
     }
     
-    public func validateWithRegexString(regexString:String) -> Bool {
+    public func validateWithRegexString(_ regexString:String) -> Bool {
         let emailTest:NSPredicate = NSPredicate(format:"SELF MATCHES %@", regexString)
-        return emailTest.evaluateWithObject(self)
+        return emailTest.evaluate(with: self)
     }
     
 }
