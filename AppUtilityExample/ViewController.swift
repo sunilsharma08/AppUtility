@@ -107,11 +107,7 @@ class ViewController: UIViewController {
 
     func showAlertButtonPressed(_ sender: UIButton) {
         //Showing AUAlertMessage
-        //AUAlertMessage().showAlertView("Title", message: "Some Message", cancelButtonTitle: "Cancel")
-        let aumessage = AUAlertMessage()
-        aumessage.setupAlertView()
-        aumessage.show()
-        
+        AUAlertMessage().showAlertView("Title", message: "Some Message", cancelButtonTitle: "Cancel")
     }
 
     func auTextFieldExample() {
