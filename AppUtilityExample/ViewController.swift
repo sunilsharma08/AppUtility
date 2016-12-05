@@ -72,7 +72,8 @@ class ViewController: UIViewController {
 
         //Getting height of string via extension.
         let someString = "This string will  be used to calculate height of string through extension"
-        print("\(someString.heightWithConstrainedWidth(320, font: UIFont.systemFont(ofSize: 15)))")
+        print("string height \(someString.heightWithConstrainedWidth(320, font: UIFont.systemFont(ofSize: 15)))")
+        print("string width \(someString.widthWithConstrainedHeight(45, font: UIFont.systemFont(ofSize: 15)))")
     }
 
     func auColorExamples() {
@@ -136,7 +137,8 @@ class ViewController: UIViewController {
         //Checking internet connection
         if AUReachability.sharedInstance.isNetworkReachable() {
             AUAlertMessage().showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
-        } else {
+        }
+        else {
             AUAlertMessage().showAlertView(nil, message: "Not Connected", cancelButtonTitle: "Cancel")
         }
     }
