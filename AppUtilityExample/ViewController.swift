@@ -20,6 +20,31 @@ class ViewController: UIViewController {
         auStringExamples()
         auDateExamples()
         auImageViewExamples()
+        
+        /*let someView = UIView.init(frame: CGRect(x: 50, y: 50, width: 100, height: 100))
+        someView.center = self.view.center
+        self.view.addSubview(someView)
+        someView.isUserInteractionEnabled = true
+        someView.backgroundColor = UIColor.yellow
+        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(dismissPanTouch(_:)))
+        someView.addGestureRecognizer(panGesture)*/
+        
+        /*let tapGestureRecogniser = UITapGestureRecognizer.init(target: self, action: #selector(dismissOnBackgroundTouch(_:)))
+        tapGestureRecogniser.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        //self.backgroundView.isMultipleTouchEnabled = false
+        self.view.addGestureRecognizer(tapGestureRecogniser)*/
+    }
+    
+    func dismissPanTouch(_ gestureRecognizer:UIPanGestureRecognizer){
+        print("\(#function)")
+        let translate = gestureRecognizer.translation(in: self.view)
+        gestureRecognizer.view?.center = CGPoint(x:gestureRecognizer.view!.center.x + translate.x,y:gestureRecognizer.view!.center.y + translate.y)
+        gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+    }
+    
+    func dismissOnBackgroundTouch(_ gestureRecognizer:UITapGestureRecognizer){
+        print("\(#function)")
     }
     
     func auImageViewExamples() {
@@ -108,10 +133,18 @@ class ViewController: UIViewController {
     func showAlertButtonPressed(_ sender: UIButton) {
         //Showing AUAlertMessage
         //AUAlertMessage().showAlertView("Title", message: "Some Message", cancelButtonTitle: "Cancel")
-        let aumessage = AUAlertMessage()
-        aumessage.setupAlertView()
-        aumessage.show()
+        //DispatchQueue.main.async {
+        //AUAlertMessage.c
+        //let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: "Cancel", otherButtonTitles: "Other")
+            //aumessage.setupAlertView()
+            //aumessage.show()
+        //}
         
+        //UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "Other", "More..").show()
+        
+    UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "ok").show()
+          
+        //UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel").show()
     }
 
     func auTextFieldExample() {
