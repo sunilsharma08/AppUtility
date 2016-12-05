@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-<<<<<<< HEAD
 class AUAlertMessage: UIView {
     
     let alertView = UIView()
@@ -73,16 +72,11 @@ class AUAlertMessage: UIView {
         setupAlertView()
     }
     
-=======
-open class AUAlertMessage: UIView {
-    
->>>>>>> 26888b27c39096e9012ebc8cc2d2129d738dc6f1
     open func showAlertView(_ title:String?, message:String?, cancelButtonTitle:String?) {
         let alert = UIAlertView.init(title: title, message: message, delegate: nil, cancelButtonTitle: cancelButtonTitle)
         alert.show()
     }
     
-<<<<<<< HEAD
     private func setupAlertView() {
         
         let keyWindow = UIApplication.shared.keyWindow
@@ -495,6 +489,4 @@ class AlertView: UIAlertView {
         //tapGestureRecogniser.numberOfTapsRequired = 1
         
     }
-=======
->>>>>>> 26888b27c39096e9012ebc8cc2d2129d738dc6f1
 }
