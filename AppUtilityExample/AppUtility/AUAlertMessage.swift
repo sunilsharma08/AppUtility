@@ -26,13 +26,13 @@ class AUAlertMessage: UIView {
     
     let minimumFlickDismissalVelocity:Float = 1400.0
     open var animationDuration:Double = 0.4
-    open var contentEdgeInsets = UIEdgeInsets.init(top: 5, left: 5, bottom: 5, right: 5)
+    open var contentEdgeInsets = UIEdgeInsets.init(top: 10, left: 5, bottom: 10, right: 5)
     
     var titleLabel:UILabel = UILabel()
     var messageLabel:UILabel = UILabel()
     var cancelButton:UIButton = UIButton(type: .custom)
-    var otherButtonTitlesArray:[String?]? = nil
-    
+    var firstOtherButton:UIButton = UIButton(type: .custom)
+    private(set) var buttonTitlesArray:[String]? = [String]()
     
     init() {
         super.init(frame: CGRect.zero)
@@ -102,18 +102,35 @@ class AUAlertMessage: UIView {
     
     func addInnerViews(title:String?, message:String?, cancelButtonTitle:String?,firstButtonTitle: String?, otherButtonTitles: [String]?) {
         if let titleString = title {
-        configTitleLabel(title: titleString)
+            titleLabel.text = title
+            configTitleLabel(title: titleString)
         }
         if let messageString = message {
-        configMessageLabel(message: messageString)
+            messageLabel.text = message
+            configMessageLabel(message: messageString)
         }
-        if (title != nil || message != nil) {
+        if (title != nil || message != nil) && (cancelButtonTitle != nil || firstButtonTitle != nil) {
         addSublayerLine()
         }
         
-        if cancelButtonTitle != nil {
-            
+        if let cancelString = cancelButtonTitle {
+            self.cancelButton.setTitle(cancelString, for: .normal)
+            buttonTitlesArray?.insert(cancelString, at: 0)
         }
+        
+        if let firstButtonTitleString = firstButtonTitle {
+            self.firstOtherButton.setTitle(firstButtonTitleString, for: .normal)
+            buttonTitlesArray?.append(firstButtonTitleString)
+        }
+        
+        for title in otherButtonTitles ?? [] {
+            buttonTitlesArray?.append(title)
+        }
+        
+        self.addOtherButtons(buttonTitles: buttonTitlesArray!)
+        /*
+        let button = UIButton(type: .custom)
+        let cancelStringWidth =  cancelButtonTitle?.widthWithConstrainedHeight(buttonHeight, font:button.titleLabel?.font ?? UIFont.systemFont(ofSize: 15))
         
         if let firstTitleString = firstButtonTitle {
             addOtherButtons(buttonTitles: [firstTitleString])
@@ -122,16 +139,33 @@ class AUAlertMessage: UIView {
         if let cancelTitleString = cancelButtonTitle {
             configCancelButton(title: cancelTitleString)
         }
+ */
         resizeAlertViewHeight()
     }
     
     func addOtherButtons(buttonTitles:[String]) {
         let lastViewFrame = getLastViewFrame(view: self.innerView)
         let messageLabelEndY = lastViewFrame.origin.y + lastViewFrame.size.height  + 8
+        let paddingBetweenButton = 2
         for (index,title) in buttonTitles.enumerated() {
             let button = UIButton.init(type: .custom)
-            let buttonYOffset = messageLabelEndY + (buttonHeight * CGFloat(index)) +  CGFloat(index * 1)
+            let buttonYOffset = messageLabelEndY + (buttonHeight * CGFloat(index)) +  CGFloat(index * paddingBetweenButton)
             button.frame = CGRect(x: 0.0, y: buttonYOffset, width: self.innerView.frame.size.width, height: buttonHeight)
+            if buttonTitles.count == 2 {
+                let cancelStringWidth =  buttonTitles[0].widthWithConstrainedHeight(buttonHeight, font:button.titleLabel?.font ?? UIFont.systemFont(ofSize: 15))
+                let otherString = buttonTitles[1]
+                let otherStringWidth = otherString.widthWithConstrainedHeight(buttonHeight, font:button.titleLabel?.font ?? UIFont.systemFont(ofSize: 15))
+                let alertHalfWidth = self.innerView.frame.size.width/2 - 10
+                if (cancelStringWidth < alertHalfWidth) && (otherStringWidth < alertHalfWidth) {
+                    if index == 0 {
+                        button.frame = CGRect(x: 0.0, y: buttonYOffset, width: self.innerView.frame.size.width/2-1, height: buttonHeight)
+                    }
+                    else if index == 1 {
+                        button.frame = CGRect(x: self.innerView.frame.size.width/2, y: buttonYOffset - buttonHeight - CGFloat(paddingBetweenButton), width: self.innerView.frame.size.width/2, height: buttonHeight)
+                    }
+                }
+            }
+            
             button.layer.cornerRadius = 2
             button.clipsToBounds = true
             button.titleLabel?.minimumScaleFactor = 0.8
@@ -194,7 +228,7 @@ class AUAlertMessage: UIView {
     
     func configTitleLabel(title: String) {
         self.titleLabel.frame = CGRect(x: 0.0, y: 0.0, width: self.innerView.frame.size.width, height: 0)
-        titleLabel.text = "SomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomethingSomething"
+        titleLabel.text = "Something"
         titleLabel.backgroundColor = UIColor.clear
         titleLabel.textColor = UIColor.black
         titleLabel.font = UIFont.boldSystemFont(ofSize: 17)

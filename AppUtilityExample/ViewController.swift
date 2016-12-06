@@ -136,15 +136,21 @@ class ViewController: UIViewController {
         //AUAlertMessage().showAlertView("Title", message: "Some Message", cancelButtonTitle: "Cancel")
         //DispatchQueue.main.async {
         //AUAlertMessage.c
-        //let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: "Cancel", otherButtonTitles: "Other")
+        let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: nil, otherButtonTitles: "Other","Cancel")
+        //let aumessage = AUAlertMessage.init(title: "Title", message: "Message", cancelButtonTitle: nil)
             //aumessage.setupAlertView()
-            //aumessage.show()
+            aumessage.show()
         //}
         
         //UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "Other", "More..").show()
         
-    UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "ok").show()
-          
+//        let alert = UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "ok")
+//        alert.show()
+//        print("cancel \(alert.cancelButtonIndex)")
+        
+//        var arr = ["ddell"]
+//        arr.insert("large", at: 1)
+//        print("arr = \(arr)")
         //UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel").show()
     }
 
