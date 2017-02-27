@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,AUAlertMessageDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,17 @@ class ViewController: UIViewController {
         self.view.isUserInteractionEnabled = true
         //self.backgroundView.isMultipleTouchEnabled = false
         self.view.addGestureRecognizer(tapGestureRecogniser)*/
+        //printFonts()
+    }
+    
+    /*func printFonts() {
+        let fontFamilyNames = UIFont.familyNames
+        for familyName in fontFamilyNames {
+            print("------------------------------")
+            print("Font Family Name = [\(familyName)]")
+            let names = UIFont.fontNames(forFamilyName: familyName )
+            print("Font Names = [\(names)]")
+        }
     }
     
     func dismissPanTouch(_ gestureRecognizer:UIPanGestureRecognizer){
@@ -46,6 +57,7 @@ class ViewController: UIViewController {
     func dismissOnBackgroundTouch(_ gestureRecognizer:UITapGestureRecognizer){
         print("\(#function)")
     }
+ */
     
     func auImageViewExamples() {
         let imageview = UIImageView.init(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
@@ -136,24 +148,32 @@ class ViewController: UIViewController {
         //AUAlertMessage().showAlertView("Title", message: "Some Message", cancelButtonTitle: "Cancel")
         //DispatchQueue.main.async {
         //AUAlertMessage.c
-        let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: nil, otherButtonTitles: "Other","Cancel")
+        let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: "Cancel", otherButtonTitles: "Other","Cancel2")
         //let aumessage = AUAlertMessage.init(title: "Title", message: "Message", cancelButtonTitle: nil)
+        //aumessage.addButtonTitle("some")
             //aumessage.setupAlertView()
+        aumessage.delegate = self
             aumessage.show()
         //}
+        //print("cancel button index = \(aumessage.cancelButtonIndex())")
         
         //UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "Other", "More..").show()
         
-//        let alert = UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "ok")
-//        alert.show()
+        //let alert = UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "ok","1","2")
+        //alert.show()
 //        print("cancel \(alert.cancelButtonIndex)")
         
 //        var arr = ["ddell"]
 //        arr.insert("large", at: 1)
 //        print("arr = \(arr)")
-        //UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel").show()
+//        let alert = UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel").show()
+        
     }
-
+    
+    func auAlertMessageClickedOn(button: UIButton, index: Int, title: String) {
+        print("\(index) \(title)")
+    }
+    
     func auTextFieldExample() {
         let auTextField = AUTextFiled.init(frame:CGRect(x: 0, y: 220, width: 170, height: 40))
         //EdgeInsets to textfiled
@@ -165,6 +185,10 @@ class ViewController: UIViewController {
         self.view.addSubview(auTextField)
 
         auTextField.text = "Teexxt with padding"
+    }
+    
+    func addNumber(a:Int,multiply b:Int) {
+        
     }
 
     func addInternetCheckButton() {
