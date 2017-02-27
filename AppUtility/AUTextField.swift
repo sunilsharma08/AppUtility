@@ -2,25 +2,26 @@
 //  AUTextField.swift
 //  AppUtility
 //
-//  Created by Apple on 22/08/16.
+//  Created by Sunil Sharma on 22/08/16.
 //  Copyright © 2016 Sunil Sharma. All rights reserved.
 //
 
 import Foundation
+import UIKit
 
-public class AUTextFiled: UITextField {
+open class AUTextFiled: UITextField {
     
-    public var edgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5);
+    open var edgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
     
-    public override func textRectForBounds(bounds: CGRect) -> CGRect {
+    open override func textRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, edgeInsets)
     }
     
-    public override func placeholderRectForBounds(bounds: CGRect) -> CGRect {
+    open override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, edgeInsets)
     }
     
-    public override func editingRectForBounds(bounds: CGRect) -> CGRect {
+    open override func editingRect(forBounds bounds: CGRect) -> CGRect {
         return UIEdgeInsetsInsetRect(bounds, edgeInsets)
     }
     

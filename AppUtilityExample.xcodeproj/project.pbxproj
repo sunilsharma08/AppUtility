@@ -7,21 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1886372B1D9AA35000532D96 /* AUDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1886372A1D9AA35000532D96 /* AUDate.swift */; };
 		1894E14C1D7CACF800F1852A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E14B1D7CACF800F1852A /* AppDelegate.swift */; };
 		1894E14E1D7CACF800F1852A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E14D1D7CACF800F1852A /* ViewController.swift */; };
 		1894E1511D7CACF800F1852A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1894E14F1D7CACF800F1852A /* Main.storyboard */; };
 		1894E1531D7CACF800F1852A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1894E1521D7CACF800F1852A /* Assets.xcassets */; };
 		1894E1561D7CACF800F1852A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1894E1541D7CACF800F1852A /* LaunchScreen.storyboard */; };
 		1894E1611D7CACF800F1852A /* AppUtilityExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1601D7CACF800F1852A /* AppUtilityExampleTests.swift */; };
-		1894E1741D7CAD7500F1852A /* AUAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E16C1D7CAD7500F1852A /* AUAlertMessage.swift */; };
-		1894E1751D7CAD7500F1852A /* AUColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E16D1D7CAD7500F1852A /* AUColor.swift */; };
-		1894E1761D7CAD7500F1852A /* AUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E16E1D7CAD7500F1852A /* AUImage.swift */; };
-		1894E1771D7CAD7500F1852A /* AULabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E16F1D7CAD7500F1852A /* AULabel.swift */; };
-		1894E1781D7CAD7500F1852A /* AUReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1701D7CAD7500F1852A /* AUReachability.swift */; };
-		1894E1791D7CAD7500F1852A /* AUString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1711D7CAD7500F1852A /* AUString.swift */; };
-		1894E17A1D7CAD7500F1852A /* AUTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E1721D7CAD7500F1852A /* AUTextField.swift */; };
-		18F6C1FF1DBE12CA00AA964C /* AUImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6C1FE1DBE12CA00AA964C /* AUImageView.swift */; };
+		18A443BC1E643C0A00E19E27 /* AUAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443B31E643C0A00E19E27 /* AUAlertMessage.swift */; };
+		18A443BD1E643C0A00E19E27 /* AUColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443B41E643C0A00E19E27 /* AUColor.swift */; };
+		18A443BE1E643C0A00E19E27 /* AUDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443B51E643C0A00E19E27 /* AUDate.swift */; };
+		18A443BF1E643C0A00E19E27 /* AUImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443B61E643C0A00E19E27 /* AUImage.swift */; };
+		18A443C01E643C0A00E19E27 /* AUImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443B71E643C0A00E19E27 /* AUImageView.swift */; };
+		18A443C11E643C0A00E19E27 /* AULabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443B81E643C0A00E19E27 /* AULabel.swift */; };
+		18A443C21E643C0A00E19E27 /* AUReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443B91E643C0A00E19E27 /* AUReachability.swift */; };
+		18A443C31E643C0A00E19E27 /* AUString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443BA1E643C0A00E19E27 /* AUString.swift */; };
+		18A443C41E643C0A00E19E27 /* AUTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443BB1E643C0A00E19E27 /* AUTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +35,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1886372A1D9AA35000532D96 /* AUDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUDate.swift; sourceTree = "<group>"; };
 		1894E1481D7CACF800F1852A /* AppUtilityExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppUtilityExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1894E14B1D7CACF800F1852A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1894E14D1D7CACF800F1852A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,14 +45,15 @@
 		1894E15C1D7CACF800F1852A /* AppUtilityExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppUtilityExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1894E1601D7CACF800F1852A /* AppUtilityExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtilityExampleTests.swift; sourceTree = "<group>"; };
 		1894E1621D7CACF800F1852A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1894E16C1D7CAD7500F1852A /* AUAlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUAlertMessage.swift; sourceTree = "<group>"; };
-		1894E16D1D7CAD7500F1852A /* AUColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUColor.swift; sourceTree = "<group>"; };
-		1894E16E1D7CAD7500F1852A /* AUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUImage.swift; sourceTree = "<group>"; };
-		1894E16F1D7CAD7500F1852A /* AULabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AULabel.swift; sourceTree = "<group>"; };
-		1894E1701D7CAD7500F1852A /* AUReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUReachability.swift; sourceTree = "<group>"; };
-		1894E1711D7CAD7500F1852A /* AUString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUString.swift; sourceTree = "<group>"; };
-		1894E1721D7CAD7500F1852A /* AUTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUTextField.swift; sourceTree = "<group>"; };
-		18F6C1FE1DBE12CA00AA964C /* AUImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUImageView.swift; sourceTree = "<group>"; };
+		18A443B31E643C0A00E19E27 /* AUAlertMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUAlertMessage.swift; sourceTree = "<group>"; };
+		18A443B41E643C0A00E19E27 /* AUColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUColor.swift; sourceTree = "<group>"; };
+		18A443B51E643C0A00E19E27 /* AUDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUDate.swift; sourceTree = "<group>"; };
+		18A443B61E643C0A00E19E27 /* AUImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUImage.swift; sourceTree = "<group>"; };
+		18A443B71E643C0A00E19E27 /* AUImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUImageView.swift; sourceTree = "<group>"; };
+		18A443B81E643C0A00E19E27 /* AULabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AULabel.swift; sourceTree = "<group>"; };
+		18A443B91E643C0A00E19E27 /* AUReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUReachability.swift; sourceTree = "<group>"; };
+		18A443BA1E643C0A00E19E27 /* AUString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUString.swift; sourceTree = "<group>"; };
+		18A443BB1E643C0A00E19E27 /* AUTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,7 @@
 		1894E14A1D7CACF800F1852A /* AppUtilityExample */ = {
 			isa = PBXGroup;
 			children = (
-				1894E16B1D7CAD7500F1852A /* AppUtility */,
+				18A443B21E643C0A00E19E27 /* AppUtility */,
 				1894E14B1D7CACF800F1852A /* AppDelegate.swift */,
 				1894E14D1D7CACF800F1852A /* ViewController.swift */,
 				1894E14F1D7CACF800F1852A /* Main.storyboard */,
@@ -115,21 +115,21 @@
 			path = AppUtilityExampleTests;
 			sourceTree = "<group>";
 		};
-		1894E16B1D7CAD7500F1852A /* AppUtility */ = {
+		18A443B21E643C0A00E19E27 /* AppUtility */ = {
 			isa = PBXGroup;
 			children = (
-				1894E16C1D7CAD7500F1852A /* AUAlertMessage.swift */,
-				1894E16D1D7CAD7500F1852A /* AUColor.swift */,
-				1894E16E1D7CAD7500F1852A /* AUImage.swift */,
-				1894E16F1D7CAD7500F1852A /* AULabel.swift */,
-				1894E1701D7CAD7500F1852A /* AUReachability.swift */,
-				1894E1711D7CAD7500F1852A /* AUString.swift */,
-				1894E1721D7CAD7500F1852A /* AUTextField.swift */,
-				1886372A1D9AA35000532D96 /* AUDate.swift */,
-				18F6C1FE1DBE12CA00AA964C /* AUImageView.swift */,
+				18A443B31E643C0A00E19E27 /* AUAlertMessage.swift */,
+				18A443B41E643C0A00E19E27 /* AUColor.swift */,
+				18A443B51E643C0A00E19E27 /* AUDate.swift */,
+				18A443B61E643C0A00E19E27 /* AUImage.swift */,
+				18A443B71E643C0A00E19E27 /* AUImageView.swift */,
+				18A443B81E643C0A00E19E27 /* AULabel.swift */,
+				18A443B91E643C0A00E19E27 /* AUReachability.swift */,
+				18A443BA1E643C0A00E19E27 /* AUString.swift */,
+				18A443BB1E643C0A00E19E27 /* AUTextField.swift */,
 			);
 			path = AppUtility;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -236,16 +236,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1894E1761D7CAD7500F1852A /* AUImage.swift in Sources */,
-				1894E1741D7CAD7500F1852A /* AUAlertMessage.swift in Sources */,
-				1894E1771D7CAD7500F1852A /* AULabel.swift in Sources */,
-				1894E1781D7CAD7500F1852A /* AUReachability.swift in Sources */,
-				18F6C1FF1DBE12CA00AA964C /* AUImageView.swift in Sources */,
-				1894E1751D7CAD7500F1852A /* AUColor.swift in Sources */,
-				1894E17A1D7CAD7500F1852A /* AUTextField.swift in Sources */,
+				18A443BE1E643C0A00E19E27 /* AUDate.swift in Sources */,
+				18A443C01E643C0A00E19E27 /* AUImageView.swift in Sources */,
+				18A443BF1E643C0A00E19E27 /* AUImage.swift in Sources */,
+				18A443BC1E643C0A00E19E27 /* AUAlertMessage.swift in Sources */,
+				18A443BD1E643C0A00E19E27 /* AUColor.swift in Sources */,
 				1894E14E1D7CACF800F1852A /* ViewController.swift in Sources */,
-				1894E1791D7CAD7500F1852A /* AUString.swift in Sources */,
-				1886372B1D9AA35000532D96 /* AUDate.swift in Sources */,
+				18A443C41E643C0A00E19E27 /* AUTextField.swift in Sources */,
+				18A443C31E643C0A00E19E27 /* AUString.swift in Sources */,
+				18A443C21E643C0A00E19E27 /* AUReachability.swift in Sources */,
+				18A443C11E643C0A00E19E27 /* AULabel.swift in Sources */,
 				1894E14C1D7CACF800F1852A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
