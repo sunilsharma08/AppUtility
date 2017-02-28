@@ -527,10 +527,6 @@ class AUAlertMessage: UIView {
         }
     }
     
-    public func addButtonTitle(_ title:String) {
-        buttonTitlesArray?.append(title)
-    }
-    
     public func showAlertView(_ title:String?, message:String?, cancelButtonTitle:String?) {
         let alert = UIAlertView.init(title: title, message: message, delegate: nil, cancelButtonTitle: cancelButtonTitle)
         alert.show()
