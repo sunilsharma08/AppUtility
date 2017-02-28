@@ -23,15 +23,16 @@ enum AUBackgroundOptions {
 
 class AUAlertMessage: UIView {
     
-    let alertView = UIView()
-    let backgroundView = UIView()
+    public let alertView = UIView()
+    public let backgroundView = UIView()
+    
     private let innerView:UIView = UIView()
+    
     public let buttonHeight:CGFloat = 45.0
     public let cornerRadius:CGFloat = 10.0
     public var dismissOnBackgroundTouch:Bool = true
     public var backgroundType:AUBackgroundOptions = .BlurEffectLight
-    
-    weak var delegate:AUAlertMessageDelegate? = nil
+    public weak var delegate:AUAlertMessageDelegate? = nil
     
     private var animator:UIDynamicAnimator? = nil
     private var attachmentBehaviour:UIAttachmentBehavior? = nil
@@ -41,13 +42,15 @@ class AUAlertMessage: UIView {
     private var alertViewIsFlickingAwayForDismissal = false
     private var isDraggingAlertView = false
     
-    let minimumFlickDismissalVelocity:Float = 1400.0
+    private let minimumFlickDismissalVelocity:Float = 1400.0
     private var animationDuration:Double = 0.4
+    
     public var contentEdgeInsets = UIEdgeInsets.init(top: 12, left: 0, bottom: 0, right: 0)
     
     public let titleLabel:UILabel = UILabel()
     public let messageLabel:UILabel = UILabel()
     public let cancelButton:UIButton = UIButton(type: .custom)
+    
     private(set) var buttonTitlesArray:[String]? = [String]()
     
     private init() {
@@ -90,12 +93,6 @@ class AUAlertMessage: UIView {
         setupAlertView()
     }
     
-    //Temporary
-    public func showAlertView(_ title:String?, message:String?, cancelButtonTitle:String?) {
-        let alert = UIAlertView.init(title: title, message: message, delegate: nil, cancelButtonTitle: cancelButtonTitle)
-        alert.show()
-    }
-    
     private func setupAlertView() {
         
         let keyWindow = UIApplication.shared.keyWindow
@@ -119,7 +116,7 @@ class AUAlertMessage: UIView {
         self.addSubview(alertView)
     }
     
-    func setBackgroundEffect(view:UIView, blurStyle:AUBackgroundOptions) {
+    private func setBackgroundEffect(view:UIView, blurStyle:AUBackgroundOptions) {
         switch blurStyle {
         case .Dark:
             view.layer.backgroundColor = UIColor.black.withAlphaComponent(0.8).cgColor
@@ -134,7 +131,7 @@ class AUAlertMessage: UIView {
         }
     }
     
-    func setBlurredView(_ view:UIView, blurEffectStyle:UIBlurEffectStyle) {
+    private func setBlurredView(_ view:UIView, blurEffectStyle:UIBlurEffectStyle) {
         if !UIAccessibilityIsReduceMotionEnabled() {
             let blurEffect = UIBlurEffect(style: blurEffectStyle)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -147,8 +144,7 @@ class AUAlertMessage: UIView {
         }
     }
     
-    
-    func addInnerViews(title:String?, message:String?, cancelButtonTitle:String?,firstButtonTitle: String?, otherButtonTitles: [String]?) {
+    private func addInnerViews(title:String?, message:String?, cancelButtonTitle:String?,firstButtonTitle: String?, otherButtonTitles: [String]?) {
         
         if let titleString = title {
             titleLabel.text = title
@@ -253,7 +249,7 @@ class AUAlertMessage: UIView {
         }
     }
     
-    func getLastViewFrame(view:UIView) -> CGRect{
+    private func getLastViewFrame(view:UIView) -> CGRect{
         
         var frame:CGRect = CGRect.zero
         let innerSubViews = self.innerView.subviews
@@ -264,20 +260,7 @@ class AUAlertMessage: UIView {
         return frame
     }
     
-    func cancelButtonIndex() -> Int {
-        if let cancelString = self.cancelButton.titleLabel?.text {
-            return (buttonTitlesArray?.index(of: cancelString)) ?? -1
-        }
-        else {
-            return -1
-        }
-    }
-    
-    func addButtonTitle(_ title:String) {
-        buttonTitlesArray?.append(title)
-    }
-    
-    func configCancelButton(title: String) {
+    private func configCancelButton(title: String) {
         cancelButton.layer.cornerRadius = 2
         cancelButton.clipsToBounds = true
         cancelButton.titleLabel?.minimumScaleFactor = 0.8
@@ -289,13 +272,13 @@ class AUAlertMessage: UIView {
         cancelButton.addTarget(self, action: #selector(clickedOnButton(button:)), for: .touchUpInside)
     }
     
-    func resizeAlertViewHeight() {
+    private func resizeAlertViewHeight() {
         let lastViewFrame = getLastViewFrame(view: self.innerView)
         alertView.frame.size.height = lastViewFrame.origin.y + lastViewFrame.size.height + contentEdgeInsets.top + contentEdgeInsets.bottom
         innerView.frame.size.height = alertView.frame.size.height - (contentEdgeInsets.top + contentEdgeInsets.bottom)
     }
     
-    func configMessageLabel(message: String) {
+    private func configMessageLabel(message: String) {
         let lastViewFrame = getLastViewFrame(view: self.innerView)
         self.messageLabel.frame = CGRect(x: 0.0, y: lastViewFrame.origin.y + lastViewFrame.size.height + 4 , width: self.innerView.frame.size.width, height: 0)
         self.messageLabel.text = message
@@ -309,7 +292,7 @@ class AUAlertMessage: UIView {
         self.innerView.addSubview(self.messageLabel)
     }
     
-    func configTitleLabel(title: String) {
+    private func configTitleLabel(title: String) {
         self.titleLabel.frame = CGRect(x: 0.0, y: 0.0, width: self.innerView.frame.size.width, height: 0)
         titleLabel.text = title
         titleLabel.backgroundColor = UIColor.clear
@@ -322,14 +305,13 @@ class AUAlertMessage: UIView {
         self.innerView.addSubview(self.titleLabel)
     }
     
-    func clickedOnButton(button:UIButton) {
+    @objc private func clickedOnButton(button:UIButton) {
         self.delegate?.auAlertMessageClickedOn(button: button, index: button.tag, title: button.titleLabel?.text ?? "")
         dismiss()
     }
     
     //Gestures and Animation
-    func addGesture() {
-        print("\(#function)")
+    private func addGesture() {
         let tapGestureRecogniser = UITapGestureRecognizer.init(target: self, action: #selector(dismissOnBackgroundTouch(_:)))
         tapGestureRecogniser.numberOfTapsRequired = 1
         self.backgroundView.isUserInteractionEnabled = true
@@ -342,7 +324,7 @@ class AUAlertMessage: UIView {
         self.alertView.addGestureRecognizer(panRecogniser)
     }
     
-    func dismissingPanGestureRecogniserPanned(_ panner:UIPanGestureRecognizer) {
+    @objc private func dismissingPanGestureRecogniserPanned(_ panner:UIPanGestureRecognizer) {
         
         let translation = panner.translation(in: self)
         let locationInView = panner.location(in: self)
@@ -386,7 +368,7 @@ class AUAlertMessage: UIView {
         }
     }
     
-    func cancelCurrentAlertviewDrag(_ animated:Bool) {
+    private func cancelCurrentAlertviewDrag(_ animated:Bool) {
         self.animator?.removeAllBehaviors()
         self.attachmentBehaviour = nil
         isDraggingAlertView = false
@@ -404,7 +386,7 @@ class AUAlertMessage: UIView {
         }
     }
     
-    func dismissAlertViewWithFlick(_ velocity:CGPoint) {
+    private func dismissAlertViewWithFlick(_ velocity:CGPoint) {
         print(#function)
         self.alertViewIsFlickingAwayForDismissal = true
         let push = UIPushBehavior.init(items: [self.alertView], mode: .instantaneous)
@@ -421,11 +403,11 @@ class AUAlertMessage: UIView {
         self.animator?.addBehavior(push)
     }
     
-    func alertViewIsOffScreen() -> Bool{
+    private func alertViewIsOffScreen() -> Bool{
         return self.animator?.items(in: self.frame).count == 0
     }
     
-    func startAlerViewDragging(location:CGPoint, translationOffset:UIOffset) {
+    private func startAlerViewDragging(location:CGPoint, translationOffset:UIOffset) {
         self.animator?.removeAllBehaviors()
         self.alertViewDragStartPoint = location
         self.alertViewDragOffsetFromActualTranslation = translationOffset
@@ -444,7 +426,7 @@ class AUAlertMessage: UIView {
         self.animator?.addBehavior(modifier)
     }
     
-    func appropriateAngularResistanceForView(_ view:UIView) -> CGFloat{
+    private func appropriateAngularResistanceForView(_ view:UIView) -> CGFloat{
         let height = view.bounds.size.height
         let width = view.bounds.size.width
         
@@ -458,7 +440,7 @@ class AUAlertMessage: UIView {
         return resistance * factor
     }
     
-    func appropriateDensityForView(_ view:UIView) -> CGFloat {
+    private func appropriateDensityForView(_ view:UIView) -> CGFloat {
         let height = view.bounds.size.height
         let width = view.bounds.size.width
         let actualArea = height * width
@@ -471,7 +453,7 @@ class AUAlertMessage: UIView {
         return appropriateDensity * factor
     }
     
-    func addSublayerLine(frame:CGRect) {
+    private func addSublayerLine(frame:CGRect) {
         
         let lineLayer = CALayer()
         lineLayer.backgroundColor = UIColor.init(white: 0.0, alpha: 0.29).cgColor
@@ -479,22 +461,7 @@ class AUAlertMessage: UIView {
         self.innerView.layer.addSublayer(lineLayer)
     }
     
-    func show() {
-        let keyWindow = UIApplication.shared.keyWindow
-        keyWindow?.addSubview(self)
-        
-        let snapBehaviour = UISnapBehavior.init(item: self.alertView, snapTo: (keyWindow?.center)!)
-        snapBehaviour.damping = 0.51
-        self.animator?.addBehavior(snapBehaviour)
-        
-        UIView.animate(withDuration: 0.1, animations: {
-            self.backgroundView.alpha = 1.0
-        }, completion: { (finished) in
-            self.addGesture()
-        })
-    }
-    
-    func dismissOnBackgroundTouch(_ gestureRecognizer:UITapGestureRecognizer){
+    @objc private func dismissOnBackgroundTouch(_ gestureRecognizer:UITapGestureRecognizer){
         
         if dismissOnBackgroundTouch == true {
             guard let senderView = gestureRecognizer.view
@@ -512,7 +479,7 @@ class AUAlertMessage: UIView {
         }
     }
     
-    func isTappedOutsideRegion(_ view:UIView, withLocation location:CGPoint) -> Bool {
+    private func isTappedOutsideRegion(_ view:UIView, withLocation location:CGPoint) -> Bool {
         let endX = view.frame.origin.x + view.frame.size.width
         let endY = view.frame.origin.y + view.frame.size.height
         
@@ -523,7 +490,22 @@ class AUAlertMessage: UIView {
         return isValid
     }
     
-    func dismiss() {
+    public func show() {
+        let keyWindow = UIApplication.shared.keyWindow
+        keyWindow?.addSubview(self)
+        
+        let snapBehaviour = UISnapBehavior.init(item: self.alertView, snapTo: (keyWindow?.center)!)
+        snapBehaviour.damping = 0.51
+        self.animator?.addBehavior(snapBehaviour)
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.backgroundView.alpha = 1.0
+        }, completion: { (finished) in
+            self.addGesture()
+        })
+    }
+    
+    public func dismiss() {
         let keyWindow = UIApplication.shared.keyWindow
         self.animator?.removeAllBehaviors()
         
@@ -536,6 +518,23 @@ class AUAlertMessage: UIView {
         })
     }
     
+    public func cancelButtonIndex() -> Int {
+        if let cancelString = self.cancelButton.titleLabel?.text {
+            return (buttonTitlesArray?.index(of: cancelString)) ?? -1
+        }
+        else {
+            return -1
+        }
+    }
+    
+    public func addButtonTitle(_ title:String) {
+        buttonTitlesArray?.append(title)
+    }
+    
+    public func showAlertView(_ title:String?, message:String?, cancelButtonTitle:String?) {
+        let alert = UIAlertView.init(title: title, message: message, delegate: nil, cancelButtonTitle: cancelButtonTitle)
+        alert.show()
+    }
     
     
     
