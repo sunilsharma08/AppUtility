@@ -111,6 +111,10 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
         aumessage.delegate = self
         aumessage.show()
         
+//        let alert = UIAlertController.init(title: "", message: "", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction.init(title: "", style: .default, handler: { () in
+//            
+//        }))
     }
     
     func auAlertMessageClickedOn(button: UIButton, index: Int, title: String) {

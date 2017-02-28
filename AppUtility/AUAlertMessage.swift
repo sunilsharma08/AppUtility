@@ -533,3 +533,7 @@ class AUAlertMessage: UIView {
     }
     
 }
+
+class AUALertButton: UIButton {
+    
+}
