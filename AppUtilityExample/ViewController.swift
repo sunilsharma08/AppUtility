@@ -107,9 +107,9 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
     }
 
     func showAlertButtonPressed(_ sender: UIButton) {
-        let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: "Cancel", otherButtonTitles: "Other","Cancel2")
+        let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: "Cancel", otherButtonTitles: "Other","Other2")
         aumessage.delegate = self
-            aumessage.show()
+        aumessage.show()
         
     }
     
