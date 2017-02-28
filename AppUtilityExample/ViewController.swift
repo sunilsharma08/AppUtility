@@ -129,10 +129,6 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
 
         auTextField.text = "Teexxt with padding"
     }
-    
-    func addNumber(a:Int,multiply b:Int) {
-        
-    }
 
     func addInternetCheckButton() {
         let netCheckButton = UIButton.init(type: .custom)
