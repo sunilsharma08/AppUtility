@@ -20,44 +20,7 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
         auStringExamples()
         auDateExamples()
         auImageViewExamples()
-        
-        /*let someView = UIView.init(frame: CGRect(x: 50, y: 50, width: 100, height: 100))
-        someView.center = self.view.center
-        self.view.addSubview(someView)
-        someView.isUserInteractionEnabled = true
-        someView.backgroundColor = UIColor.yellow
-        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(dismissPanTouch(_:)))
-        someView.addGestureRecognizer(panGesture)*/
-        
-        /*let tapGestureRecogniser = UITapGestureRecognizer.init(target: self, action: #selector(dismissOnBackgroundTouch(_:)))
-        tapGestureRecogniser.numberOfTapsRequired = 1
-        self.view.isUserInteractionEnabled = true
-        //self.backgroundView.isMultipleTouchEnabled = false
-        self.view.addGestureRecognizer(tapGestureRecogniser)*/
-        //printFonts()
     }
-    
-    /*func printFonts() {
-        let fontFamilyNames = UIFont.familyNames
-        for familyName in fontFamilyNames {
-            print("------------------------------")
-            print("Font Family Name = [\(familyName)]")
-            let names = UIFont.fontNames(forFamilyName: familyName )
-            print("Font Names = [\(names)]")
-        }
-    }
-    
-    func dismissPanTouch(_ gestureRecognizer:UIPanGestureRecognizer){
-        print("\(#function)")
-        let translate = gestureRecognizer.translation(in: self.view)
-        gestureRecognizer.view?.center = CGPoint(x:gestureRecognizer.view!.center.x + translate.x,y:gestureRecognizer.view!.center.y + translate.y)
-        gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-    }
-    
-    func dismissOnBackgroundTouch(_ gestureRecognizer:UITapGestureRecognizer){
-        print("\(#function)")
-    }
- */
     
     func auImageViewExamples() {
         let imageview = UIImageView.init(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
@@ -144,29 +107,9 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
     }
 
     func showAlertButtonPressed(_ sender: UIButton) {
-        //Showing AUAlertMessage
-        //AUAlertMessage().showAlertView("Title", message: "Some Message", cancelButtonTitle: "Cancel")
-        //DispatchQueue.main.async {
-        //AUAlertMessage.c
         let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: "Cancel", otherButtonTitles: "Other","Cancel2")
-        //let aumessage = AUAlertMessage.init(title: "Title", message: "Message", cancelButtonTitle: nil)
-        //aumessage.addButtonTitle("some")
-            //aumessage.setupAlertView()
         aumessage.delegate = self
             aumessage.show()
-        //}
-        //print("cancel button index = \(aumessage.cancelButtonIndex())")
-        
-        //UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "Other", "More..").show()
-        
-        //let alert = UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "ok","1","2")
-        //alert.show()
-//        print("cancel \(alert.cancelButtonIndex)")
-        
-//        var arr = ["ddell"]
-//        arr.insert("large", at: 1)
-//        print("arr = \(arr)")
-//        let alert = UIAlertView.init(title: "Title", message: "Message", delegate: nil, cancelButtonTitle: "Cancel").show()
         
     }
     
@@ -213,6 +156,5 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
 
 }

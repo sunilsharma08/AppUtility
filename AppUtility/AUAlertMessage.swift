@@ -103,7 +103,6 @@ class AUAlertMessage: UIView {
         
         backgroundView.frame = keyWindow?.bounds ?? CGRect.zero
         self.setBackgroundEffect(view: backgroundView, blurStyle: backgroundType)
-        //        backgroundView.backgroundColor = UIColor.init(white: 0.0, alpha: 0.4)
         backgroundView.alpha = 0.0
         self.addSubview(backgroundView)
         
@@ -175,19 +174,6 @@ class AUAlertMessage: UIView {
         }
         
         self.addOtherButtons(buttonTitles: buttonTitlesArray!)
-        
-        /*
-         let button = UIButton(type: .custom)
-         let cancelStringWidth =  cancelButtonTitle?.widthWithConstrainedHeight(buttonHeight, font:button.titleLabel?.font ?? UIFont.systemFont(ofSize: 15))
-         
-         if let firstTitleString = firstButtonTitle {
-         addOtherButtons(buttonTitles: [firstTitleString])
-         }
-         addOtherButtons(buttonTitles: otherButtonTitles!)
-         if let cancelTitleString = cancelButtonTitle {
-         configCancelButton(title: cancelTitleString)
-         }
-         */
         resizeAlertViewHeight()
     }
     
@@ -233,7 +219,6 @@ class AUAlertMessage: UIView {
             }
             
             if index == 0 && self.cancelButton.titleLabel?.text != nil {
-                //self.cancelButton.frame = button.frame
                 configCancelButton(title: title)
                 self.cancelButton.tag = button.tag
             }
@@ -293,8 +278,6 @@ class AUAlertMessage: UIView {
     }
     
     func configCancelButton(title: String) {
-        //let lastViewFrame = getLastViewFrame(view: self.innerView)
-        //cancelButton.frame = CGRect(x: 0.0, y: lastViewFrame.origin.y + lastViewFrame.size.height + 6, width:lastViewFrame.size.width, height: buttonHeight)
         cancelButton.layer.cornerRadius = 2
         cancelButton.clipsToBounds = true
         cancelButton.titleLabel?.minimumScaleFactor = 0.8
@@ -304,11 +287,9 @@ class AUAlertMessage: UIView {
         cancelButton.backgroundColor = UIColor.clear
         cancelButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         cancelButton.addTarget(self, action: #selector(clickedOnButton(button:)), for: .touchUpInside)
-        //innerView.addSubview(cancelButton)
     }
     
     func resizeAlertViewHeight() {
-        
         let lastViewFrame = getLastViewFrame(view: self.innerView)
         alertView.frame.size.height = lastViewFrame.origin.y + lastViewFrame.size.height + contentEdgeInsets.top + contentEdgeInsets.bottom
         innerView.frame.size.height = alertView.frame.size.height - (contentEdgeInsets.top + contentEdgeInsets.bottom)
@@ -406,7 +387,6 @@ class AUAlertMessage: UIView {
     }
     
     func cancelCurrentAlertviewDrag(_ animated:Bool) {
-        print(#function)
         self.animator?.removeAllBehaviors()
         self.attachmentBehaviour = nil
         isDraggingAlertView = false
@@ -446,7 +426,6 @@ class AUAlertMessage: UIView {
     }
     
     func startAlerViewDragging(location:CGPoint, translationOffset:UIOffset) {
-        print(#function)
         self.animator?.removeAllBehaviors()
         self.alertViewDragStartPoint = location
         self.alertViewDragOffsetFromActualTranslation = translationOffset
@@ -548,14 +527,6 @@ class AUAlertMessage: UIView {
         let keyWindow = UIApplication.shared.keyWindow
         self.animator?.removeAllBehaviors()
         
-        /*let gravityBehaviour = UIGravityBehavior.init(items: [self.alertView])
-         gravityBehaviour.gravityDirection = CGVector(dx: 0, dy: 10)
-         self.animator?.addBehavior(gravityBehaviour)
-         
-         let itemBehaviour = UIDynamicItemBehavior.init(items: [self.alertView])
-         itemBehaviour.addAngularVelocity(CGFloat(-M_PI_2), for: self.alertView)
-         self.animator?.addBehavior(itemBehaviour)*/
-        
         UIView.perform(.delete, on: [self.alertView], options: .curveEaseInOut, animations: {[weak self] in
             self?.backgroundView.alpha = 0.0
             keyWindow?.tintAdjustmentMode = .automatic
@@ -563,14 +534,6 @@ class AUAlertMessage: UIView {
             },completion: {[weak self] (finished) in
                 self?.removeFromSuperview()
         })
-        
-        /*UIView.animate(withDuration: animationDuration, animations: {[weak self] in
-         self?.backgroundView.alpha = 0.0
-         keyWindow?.tintAdjustmentMode = .automatic
-         keyWindow?.tintColorDidChange()
-         }, completion: {[weak self] (finished) in
-         self?.removeFromSuperview()
-         })*/
     }
     
     
