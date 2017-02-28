@@ -45,9 +45,9 @@ class AUAlertMessage: UIView {
     private var animationDuration:Double = 0.4
     public var contentEdgeInsets = UIEdgeInsets.init(top: 12, left: 0, bottom: 0, right: 0)
     
-    let titleLabel:UILabel = UILabel()
-    let messageLabel:UILabel = UILabel()
-    let cancelButton:UIButton = UIButton(type: .custom)
+    public let titleLabel:UILabel = UILabel()
+    public let messageLabel:UILabel = UILabel()
+    public let cancelButton:UIButton = UIButton(type: .custom)
     private(set) var buttonTitlesArray:[String]? = [String]()
     
     private init() {
