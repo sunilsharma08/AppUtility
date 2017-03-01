@@ -8,8 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController,AUAlertMessageDelegate {
+class ViewController: UIViewController,AUAlertMessageDelegate,UIScrollViewDelegate {
 
+//    let imageview = UIImageView(image: UIImage.init(named: "image.jpg"))
+//    let scrollView = UIScrollView.init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         auColorExamples()
@@ -20,14 +23,67 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
         auStringExamples()
         auDateExamples()
         auImageViewExamples()
+        //enableImageZoom()
     }
     
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        
+//        setZoomScale()
+//    }
+    
+    /*public func enableImageZoom() {
+        
+        scrollView.delegate = self
+        scrollView.frame = self.view.bounds
+        scrollView.backgroundColor = UIColor.black
+        scrollView.contentSize = imageview.bounds.size
+        scrollView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        scrollView.addSubview(imageview)
+        self.view.addSubview(scrollView)
+        setZoomScale()
+    }*/
+    
     func auImageViewExamples() {
-        let imageview = UIImageView.init(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
+        let imageview = AUImageView(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
         imageview.backgroundColor = UIColor.white
         self.view.addSubview(imageview)
-        imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", completionHandler: nil)
+        imageview.isUserInteractionEnabled = true
+        imageview.enableImageZoom = true
+        
+        imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", completionHandler:{(isSuccess) in
+        })
+        
     }
+    
+    /*
+     func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        let imageViewSize = imageview.frame.size
+        let scrollViewSize = scrollView.bounds.size
+        
+        let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
+        let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
+        
+        scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
+    }
+    
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageview
+    }
+    
+     func setZoomScale() {
+        
+//        let imageViewSize = imageview.bounds.size
+//        let scrollViewSize = scrollView.bounds.size
+//        let widthScale = scrollViewSize.width / imageViewSize.width
+//        let heightScale = scrollViewSize.height / imageViewSize.height
+        
+        scrollView.minimumZoomScale = 0.1
+        scrollView.maximumZoomScale = 3.0
+        scrollView.zoomScale = 1.0
+    }
+    */
 
     func auDateExamples() {
         let dateFormatter = DateFormatter()
