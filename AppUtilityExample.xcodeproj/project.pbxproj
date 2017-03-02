@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
 		1816728D1E66E52100A1EE57 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1816728C1E66E52100A1EE57 /* image.jpg */; };
+=======
+		181672C91E67101000A1EE57 /* AUView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181672C81E67101000A1EE57 /* AUView.swift */; };
+>>>>>>> d6f626f553353158085273d663002e540848b58a
 		1894E14C1D7CACF800F1852A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E14B1D7CACF800F1852A /* AppDelegate.swift */; };
 		1894E14E1D7CACF800F1852A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E14D1D7CACF800F1852A /* ViewController.swift */; };
 		1894E1511D7CACF800F1852A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1894E14F1D7CACF800F1852A /* Main.storyboard */; };
@@ -36,7 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		1816728C1E66E52100A1EE57 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+=======
+		181672C81E67101000A1EE57 /* AUView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUView.swift; sourceTree = "<group>"; };
+>>>>>>> d6f626f553353158085273d663002e540848b58a
 		1894E1481D7CACF800F1852A /* AppUtilityExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppUtilityExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1894E14B1D7CACF800F1852A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1894E14D1D7CACF800F1852A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +138,7 @@
 				18A443B91E643C0A00E19E27 /* AUReachability.swift */,
 				18A443BA1E643C0A00E19E27 /* AUString.swift */,
 				18A443BB1E643C0A00E19E27 /* AUTextField.swift */,
+				181672C81E67101000A1EE57 /* AUView.swift */,
 			);
 			path = AppUtility;
 			sourceTree = SOURCE_ROOT;
@@ -240,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181672C91E67101000A1EE57 /* AUView.swift in Sources */,
 				18A443BE1E643C0A00E19E27 /* AUDate.swift in Sources */,
 				18A443C01E643C0A00E19E27 /* AUImageView.swift in Sources */,
 				18A443BF1E643C0A00E19E27 /* AUImage.swift in Sources */,
