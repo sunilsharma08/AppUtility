@@ -80,13 +80,13 @@ let fixImage:UIImage = image?.fixOrientation()
 AUAlertMessage().showAlertView("Title", message: "Message", cancelButtonTitle: "Cancel")
 ```
 
-#Contribution
+# Contribution
 Feel free to add code which you think is necessary in almost every project.
 
-#Sources
+# Sources
 * [Stackoverflow](http://stackoverflow.com/)
 * [Github Gist](https://gist.github.com/discover)
 * Other websites
 
-#License
+# License
 AppUtility is available under the [MIT License](https://raw.githubusercontent.com/sunilsharma08/AppUtility/master/License).
