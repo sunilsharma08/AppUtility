@@ -52,7 +52,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
     
     private let zoomScrollView = UIScrollView.init()
     private let doubleTapGesture = UITapGestureRecognizer.init()
-    private let closeButton = UIButton.init(type: .custom)
+    private let closeButton = UIToolbar(frame: CGRect.zero)
     
     private func setupGestureRecognizer() {
         doubleTapGesture.addTarget(self, action: #selector(handleDoubleTap(recognizer:)))
@@ -81,20 +81,21 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         
         zoomScrollView.isUserInteractionEnabled = true
         zoomScrollView.delegate = self
-//        zoomScrollView.frame = UIScreen.main.bounds
-//        zoomScrollView.frame.origin.y = UIApplication.shared.statusBarFrame.height
-//        zoomScrollView.frame.size.height = zoomScrollView.frame.size.height - UIApplication.shared.statusBarFrame.height
         zoomScrollView.backgroundColor = UIColor.black
         zoomScrollView.contentSize = self.bounds.size
         zoomScrollView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
         
-        
-        closeButton.setTitle("Close", for: .normal)
-        closeButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        closeButton.addTarget(self, action: #selector(closeZoomView(sender:)), for: .touchUpInside)
-        closeButton.layer.cornerRadius = 5
-        closeButton.layer.borderWidth = 1
-        closeButton.layer.borderColor = UIColor.white.cgColor
+        let barButton = UIBarButtonItem(barButtonSystemItem: .stop , target: self, action: #selector(closeZoomView(sender:)))
+        barButton.tintColor  = UIColor.white
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        closeButton.setItems([flexibleSpace,barButton,flexibleSpace], animated: false)
+        closeButton.barStyle = .black
+        closeButton.isTranslucent = true
+        closeButton.backgroundColor = UIColor.clear
+        closeButton.setBackgroundImage(UIImage(),
+                                        forToolbarPosition: .any,
+                                        barMetrics: .default)
+        closeButton.setShadowImage(UIImage(), forToolbarPosition: .any)
         
     }
     
@@ -159,9 +160,10 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
                 completion: { (Bool) -> Void in
                     
                     self.setZoomScale(scrollView: self.zoomScrollView)
-                    let buttonWidth:CGFloat = 50.0
-                    self.closeButton.frame = CGRect.init(x: self.zoomScrollView.frame.origin.x + self.self.zoomScrollView.frame.size.width - (buttonWidth + 15.0) , y: self.zoomScrollView.frame.origin.y + 20, width: buttonWidth, height: 30)
+                    let buttonWidth:CGFloat = 40.0
+                    self.closeButton.frame = CGRect.init(x: self.zoomScrollView.frame.origin.x + self.self.zoomScrollView.frame.size.width - (buttonWidth + 8.0) , y: self.zoomScrollView.frame.origin.y + 8, width: buttonWidth, height: buttonWidth)
                     UIApplication.shared.keyWindow?.addSubview(self.closeButton)
+                    self.closeButton.alpha = 1.0
             })
         }
         
@@ -174,6 +176,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
                 initialSpringVelocity:0,
                 options:[.curveEaseInOut] ,
                 animations: {
+                self.closeButton.alpha = 0.0
                 self.zoomScrollView.frame = self.frame
                 self.zoomScrollView.layer.opacity = 0.9
                 self.setZoomScale(scrollView: self.zoomScrollView)
@@ -184,10 +187,6 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
                 self.closeButton.removeFromSuperview()
             }
         }
-
-    
-    
-    
     
     
     
