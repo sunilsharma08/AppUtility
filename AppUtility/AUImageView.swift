@@ -31,7 +31,6 @@ extension UIImageView {
             })
         }).resume()
     }
-    
 }
 
 class AUImageView: UIImageView,UIScrollViewDelegate {
@@ -77,6 +76,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         zoomScrollView.delegate = nil
         self.removeGestureRecognizer(doubleTapGesture)
     }
+    
     private func configImageZoom() {
         
         zoomScrollView.isUserInteractionEnabled = true
@@ -117,24 +117,82 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         zoomScrollViewFrame.size.height = zoomScrollViewFrame.size.height - UIApplication.shared.statusBarFrame.height
         zoomScrollView.frame = self.frame
         
-        //self.setZoomScale(scrollView: self.zoomScrollView)
-        zoomScrollView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: [.curveEaseInOut], animations: {[weak self] in
-            self?.zoomScrollView.transform = CGAffineTransform.identity
+        self.setZoomScale(scrollView: self.zoomScrollView)
+        
+        presentAnimation(copyImageview!)
+        
+        /*UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.8, options: [.curveEaseInOut], animations: {[weak self] in
             self?.zoomScrollView.frame = zoomScrollViewFrame
+            
         }, completion:{ (finished) in
-            //self.setZoomScale(scrollView: self.zoomScrollView)
+            self.setZoomScale(scrollView: self.zoomScrollView)
             let buttonWidth:CGFloat = 50.0
             self.closeButton.frame = CGRect.init(x: self.zoomScrollView.frame.origin.x + self.self.zoomScrollView.frame.size.width - (buttonWidth + 15.0) , y: self.zoomScrollView.frame.origin.y + 20, width: buttonWidth, height: 30)
             UIApplication.shared.keyWindow?.addSubview(self.closeButton)
-        })
+        })*/
     }
     
+    
+    func presentAnimation(_ imageView:UIImageView, completion: ((Void) -> Void)? = nil) {
+        imageView.isHidden = true
+        imageView.alpha = 0.0
+        self.zoomScrollView.alpha = 0.0
+        
+        var zoomScrollViewFrame = UIScreen.main.bounds
+        zoomScrollViewFrame.origin.y = UIApplication.shared.statusBarFrame.height
+        zoomScrollViewFrame.size.height = zoomScrollViewFrame.size.height - UIApplication.shared.statusBarFrame.height
+        zoomScrollView.frame = self.frame
+        
+            UIView.animate(
+                withDuration: 0.6,
+                delay: 0,
+                usingSpringWithDamping:0.8,
+                initialSpringVelocity:0,
+                options:[.curveEaseInOut],
+                animations: {
+                    self.zoomScrollView.alpha = 1.0
+                    self.zoomScrollView.frame = zoomScrollViewFrame
+                    self.setZoomScale(scrollView: self.zoomScrollView)
+                    imageView.isHidden = false
+                    imageView.alpha = 1.0
+            },
+                completion: { (Bool) -> Void in
+                    
+                    self.setZoomScale(scrollView: self.zoomScrollView)
+                    let buttonWidth:CGFloat = 50.0
+                    self.closeButton.frame = CGRect.init(x: self.zoomScrollView.frame.origin.x + self.self.zoomScrollView.frame.size.width - (buttonWidth + 15.0) , y: self.zoomScrollView.frame.origin.y + 20, width: buttonWidth, height: 30)
+                    UIApplication.shared.keyWindow?.addSubview(self.closeButton)
+            })
+        }
+        
+        func dismissAnimation(completion: ((Void) -> Void)? = nil) {
+            
+            UIView.animate(
+                withDuration: 0.4,
+                delay:0,
+                usingSpringWithDamping:0.8,
+                initialSpringVelocity:0,
+                options:[.curveEaseInOut] ,
+                animations: {
+                self.zoomScrollView.frame = self.frame
+                self.zoomScrollView.layer.opacity = 0.9
+                self.setZoomScale(scrollView: self.zoomScrollView)
+            }) { (finished) in
+                let imageView = self.zoomScrollView.viewWithTag(10204)
+                imageView?.removeFromSuperview()
+                self.zoomScrollView.removeFromSuperview()
+                self.closeButton.removeFromSuperview()
+            }
+        }
+
+    
+    
+    
+    
+    
+    
     func closeZoomView(sender:UIButton) {
-        zoomScrollView.removeFromSuperview()
-        let imageView = zoomScrollView.viewWithTag(10204)
-        imageView?.removeFromSuperview()
-        closeButton.removeFromSuperview()
+        dismissAnimation(completion: nil)
     }
     
     internal func scrollViewDidZoom(_ scrollView: UIScrollView) {
@@ -162,4 +220,5 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         scrollView.maximumZoomScale = maximumZoomScale
         scrollView.zoomScale = zoomScale
     }
+    
 }

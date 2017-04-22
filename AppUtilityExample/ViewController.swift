@@ -50,9 +50,10 @@ class ViewController: UIViewController,AUAlertMessageDelegate,UIScrollViewDelega
         self.view.addSubview(imageview)
         imageview.isUserInteractionEnabled = true
         imageview.enableImageZoom = true
+        imageview.image = UIImage(named: "image.jpg")
         
-        imageview.imageWithURL("http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg", completionHandler:{(isSuccess) in
-        })
+        //imageview.imageWithURL("http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg", completionHandler:{(isSuccess) in
+        //})
         
     }
     
