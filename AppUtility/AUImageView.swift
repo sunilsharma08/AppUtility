@@ -38,6 +38,16 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
     var maximumZoomScale:CGFloat = 10.0
     var minimumZoomScale:CGFloat = -1
     var zoomScale:CGFloat = 1.0
+    var isZoomBlurBackgroundEnabled:Bool = false {
+        didSet {
+            if isZoomBlurBackgroundEnabled {
+                createVisualEffectView()
+            }
+            else {
+                removeVisualEffectView()
+            }
+        }
+    }
     var enableImageZoom = false {
         didSet {
             if enableImageZoom {
@@ -53,6 +63,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
     private var zoomScrollView:UIScrollView!
     private var doubleTapGesture:UITapGestureRecognizer!
     private var closeButton:UIToolbar!
+    private var blurEffectView:UIVisualEffectView!
     
     private func setupGestureRecognizer() {
         if doubleTapGesture == nil {
@@ -63,6 +74,18 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         self.addGestureRecognizer(doubleTapGesture)
     }
     
+    private func createVisualEffectView() {
+        if blurEffectView == nil {
+            let blurEffect = UIBlurEffect(style:.light)
+            blurEffectView = UIVisualEffectView(effect: blurEffect)
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        }
+    }
+    
+    private func removeVisualEffectView() {
+        blurEffectView = nil
+    }
+    
     @objc private func handleDoubleTap(recognizer: UITapGestureRecognizer) {
         showZoomView()
     }
@@ -70,6 +93,10 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
     private func disableImageZoom(){
         zoomScrollView.delegate = nil
         self.removeGestureRecognizer(doubleTapGesture)
+        zoomScrollView = nil
+        doubleTapGesture = nil
+        closeButton = nil
+        removeVisualEffectView()
     }
     
     private func configImageZoom() {
@@ -101,6 +128,8 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
                                        barMetrics: .default)
         closeButton.setShadowImage(UIImage(), forToolbarPosition: .any)
         
+        createVisualEffectView()
+        
     }
     
     func showZoomView() {
@@ -112,27 +141,31 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         if copyImageview == nil {
             copyImageview = UIImageView.init()
         }
-        //copyImageview?.image = self.image
         copyImageview?.tag = 10204
         copyImageview?.frame.origin.x = 0
         copyImageview?.frame.origin.y = 0
-        print("copy \(copyImageview?.layer.cornerRadius)")
-        print("real \(self.layer.cornerRadius)")
         zoomScrollView.addSubview(copyImageview!)
-        
-        UIApplication.shared.keyWindow?.addSubview(zoomScrollView)
         
         var zoomScrollViewFrame = UIScreen.main.bounds
         zoomScrollViewFrame.origin.y = UIApplication.shared.statusBarFrame.height
         zoomScrollViewFrame.size.height = zoomScrollViewFrame.size.height - UIApplication.shared.statusBarFrame.height
         zoomScrollView.frame = self.frame
         
+        if isZoomBlurBackgroundEnabled && blurEffectView != nil {
+            zoomScrollView.backgroundColor = UIColor.clear
+            blurEffectView.frame = zoomScrollView.frame
+            UIApplication.shared.keyWindow?.addSubview(blurEffectView)
+        }
+        else {
+            zoomScrollView.backgroundColor = UIColor.black
+        }
+        
+        UIApplication.shared.keyWindow?.addSubview(zoomScrollView)
         self.setZoomScale(scrollView: self.zoomScrollView)
         
         presentAnimation(copyImageview!)
         
     }
-    
     
     func presentAnimation(_ imageView:UIImageView, completion: ((Void) -> Void)? = nil) {
         imageView.isHidden = true
@@ -148,7 +181,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         UIView.animate(
             withDuration: 0.6,
             delay: 0,
-            usingSpringWithDamping:0.8,
+            usingSpringWithDamping:0.75,
             initialSpringVelocity:0,
             options:[.curveEaseInOut],
             animations: {
@@ -158,6 +191,12 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
                 self.setZoomScale(scrollView: self.zoomScrollView)
                 imageView.isHidden = false
                 imageView.alpha = 1.0
+                if self.blurEffectView != nil {
+                    self.blurEffectView.isHidden = false
+                    self.blurEffectView.layer.cornerRadius = 0
+                    self.blurEffectView.frame = zoomScrollViewFrame
+                    
+                }
         },
             completion: { (Bool) -> Void in
                 
@@ -183,11 +222,19 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
                 self.zoomScrollView.layer.cornerRadius = self.layer.cornerRadius
                 imageView?.layer.cornerRadius = self.layer.cornerRadius
                 self.setZoomScale(scrollView: self.zoomScrollView)
+                if self.blurEffectView != nil {
+                    self.blurEffectView.isHidden = true
+                    self.blurEffectView.frame = self.frame
+                    self.blurEffectView.layer.cornerRadius = self.layer.cornerRadius
+                }
         }) { (finished) in
             self.zoomScrollView.layer.cornerRadius = 0
             imageView?.removeFromSuperview()
             self.zoomScrollView.removeFromSuperview()
             self.closeButton.removeFromSuperview()
+            if self.blurEffectView != nil {
+                self.blurEffectView.removeFromSuperview()
+            }
         }
     }
     
