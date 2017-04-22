@@ -51,7 +51,7 @@ class ViewController: UIViewController,AUAlertMessageDelegate,UIScrollViewDelega
         imageview.isUserInteractionEnabled = true
         imageview.enableImageZoom = true
         
-        imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", completionHandler:{(isSuccess) in
+        imageview.imageWithURL("http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg", completionHandler:{(isSuccess) in
         })
         
     }
