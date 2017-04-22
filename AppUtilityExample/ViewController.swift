@@ -28,9 +28,12 @@ class ViewController: UIViewController,AUAlertMessageDelegate,UIScrollViewDelega
         self.view.addSubview(imageview)
         imageview.isUserInteractionEnabled = true
         imageview.enableImageZoom = true
+        imageview.clipsToBounds = true
+        imageview.layer.cornerRadius = 100
         //imageview.image = UIImage(named: "image.jpg")
-        
-        imageview.imageWithURL("http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg", completionHandler:{(isSuccess) in
+        //http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg
+        //http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg
+        imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", completionHandler:{(isSuccess) in
         })
         
     }
