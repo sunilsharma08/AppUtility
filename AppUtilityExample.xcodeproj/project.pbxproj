@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		181672C91E67101000A1EE57 /* AUView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181672C81E67101000A1EE57 /* AUView.swift */; };
+		181672CD1E67F53900A1EE57 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 181672CC1E67F53900A1EE57 /* image.jpg */; };
 		1894E14C1D7CACF800F1852A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E14B1D7CACF800F1852A /* AppDelegate.swift */; };
 		1894E14E1D7CACF800F1852A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1894E14D1D7CACF800F1852A /* ViewController.swift */; };
 		1894E1511D7CACF800F1852A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1894E14F1D7CACF800F1852A /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		181672C81E67101000A1EE57 /* AUView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUView.swift; sourceTree = "<group>"; };
+		181672CC1E67F53900A1EE57 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		1894E1481D7CACF800F1852A /* AppUtilityExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppUtilityExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1894E14B1D7CACF800F1852A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1894E14D1D7CACF800F1852A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		1894E14A1D7CACF800F1852A /* AppUtilityExample */ = {
 			isa = PBXGroup;
 			children = (
+				181672CC1E67F53900A1EE57 /* image.jpg */,
 				18A443B21E643C0A00E19E27 /* AppUtility */,
 				1894E14B1D7CACF800F1852A /* AppDelegate.swift */,
 				1894E14D1D7CACF800F1852A /* ViewController.swift */,
@@ -222,6 +225,7 @@
 				1894E1561D7CACF800F1852A /* LaunchScreen.storyboard in Resources */,
 				1894E1531D7CACF800F1852A /* Assets.xcassets in Resources */,
 				1894E1511D7CACF800F1852A /* Main.storyboard in Resources */,
+				181672CD1E67F53900A1EE57 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +397,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunilsharma.AppUtilityExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -407,6 +412,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sunilsharma.AppUtilityExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

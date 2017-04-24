@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController,AUAlertMessageDelegate {
-
+class ViewController: UIViewController,AUAlertMessageDelegate,UIScrollViewDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         auColorExamples()
@@ -23,12 +23,22 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
     }
     
     func auImageViewExamples() {
-        let imageview = UIImageView.init(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
+        let imageview = AUImageView(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
         imageview.backgroundColor = UIColor.white
         self.view.addSubview(imageview)
-        imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", completionHandler: nil)
+        imageview.isUserInteractionEnabled = true
+        imageview.enableImageZoom = true
+        imageview.isZoomBlurBackgroundEnabled = true
+        imageview.clipsToBounds = true
+        //imageview.layer.cornerRadius = 100
+        //imageview.image = UIImage(named: "image.jpg")
+        //http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg
+        //http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg
+        imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", completionHandler:{(isSuccess) in
+        })
+        
     }
-
+    
     func auDateExamples() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
@@ -111,6 +121,9 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
         aumessage.delegate = self
         aumessage.show()
         
+//        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
     }
     
     func auAlertMessageClickedOn(button: UIButton, index: Int, title: String) {
