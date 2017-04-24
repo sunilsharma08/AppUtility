@@ -11,16 +11,22 @@ import UIKit
 extension UIImageView {
     
     public func imageWithURL(_ urlString: String, withLoadingIndictor enable:Bool = true, completionHandler:((_ isSuccess: Bool) -> ())?) {
-        let indicatorView = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
-        self.addSubview(indicatorView)
-        indicatorView.center = CGPoint(x: self.bounds.size.width  / 2,
+        var indicatorView:UIActivityIndicatorView? = nil
+        if enable {
+        indicatorView = UIActivityIndicatorView.init(activityIndicatorStyle: .gray)
+        self.addSubview(indicatorView!)
+        indicatorView?.center = CGPoint(x: self.bounds.size.width  / 2,
                                        y: self.bounds.size.height / 2);
-        indicatorView.startAnimating()
-        indicatorView.hidesWhenStopped = true
+        indicatorView?.startAnimating()
+        indicatorView?.hidesWhenStopped = true
+            }
         URLSession.shared.dataTask(with: URL(string: urlString)!, completionHandler: {[weak self] (data, response, error) -> Void in
             DispatchQueue.main.async(execute: { () -> Void in
-                indicatorView.stopAnimating()
-                indicatorView.removeFromSuperview()
+                if enable {
+                indicatorView?.stopAnimating()
+                indicatorView?.removeFromSuperview()
+                indicatorView = nil
+                }
                 if error != nil {
                     completionHandler?(false)
                     return
@@ -269,5 +275,4 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         scrollView.maximumZoomScale = maximumZoomScale
         scrollView.zoomScale = zoomScale
     }
-    
 }
