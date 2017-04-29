@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/**
+ Enum to describe AlertView background.
+ */
 enum AUBackgroundOptions {
     case BlurEffectExtraLight
     case BlurEffectLight
@@ -17,6 +20,9 @@ enum AUBackgroundOptions {
     case None
 }
 
+/**
+ AlertView Protocols
+ */
 @objc protocol AUAlertMessageDelegate {
     @objc func auAlertMessageClickedOn(button:UIButton, index:Int, title:String)
 }
@@ -104,7 +110,7 @@ class AUAlertMessage: UIView {
         self.addSubview(backgroundView)
         
         let alertViewHorizontalPadding:CGFloat = 40
-        alertView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width - alertViewHorizontalPadding, height: 100)
+        alertView.frame = CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width - alertViewHorizontalPadding, height: 100)
         alertView.backgroundColor = UIColor.white
         alertView.layer.cornerRadius = self.cornerRadius
         alertView.layer.masksToBounds = true
@@ -307,7 +313,7 @@ class AUAlertMessage: UIView {
     
     @objc private func clickedOnButton(button:UIButton) {
         self.delegate?.auAlertMessageClickedOn(button: button, index: button.tag, title: button.titleLabel?.text ?? "")
-        dismiss()
+        dismiss(animated: true)
     }
     
     //Gestures and Animation
@@ -359,7 +365,7 @@ class AUAlertMessage: UIView {
                     self.dismissAlertViewWithFlick(velocity)
                 }
                 else {
-                    dismiss()
+                    dismiss(animated: true)
                 }
             }
             else {
@@ -396,7 +402,7 @@ class AUAlertMessage: UIView {
             if self.alertViewIsOffScreen() {
                 self.animator?.removeAllBehaviors()
                 self.attachmentBehaviour = nil
-                self.dismiss()
+                self.dismiss(animated: false)
             }
         }
         self.animator?.removeBehavior(self.attachmentBehaviour!)
@@ -473,7 +479,7 @@ class AUAlertMessage: UIView {
                 let location = gestureRecognizer.location(in: senderView.superview)
                 let closeSuperView = self.isTappedOutsideRegion(self.alertView, withLocation: location)
                 if closeSuperView == true {
-                    self.dismiss()
+                    self.dismiss(animated: true)
                 }
             }
         }
@@ -493,22 +499,31 @@ class AUAlertMessage: UIView {
     public func show() {
         let keyWindow = UIApplication.shared.keyWindow
         keyWindow?.addSubview(self)
+        animator?.removeAllBehaviors()
         
         let snapBehaviour = UISnapBehavior.init(item: self.alertView, snapTo: (keyWindow?.center)!)
-        snapBehaviour.damping = 0.51
-        self.animator?.addBehavior(snapBehaviour)
+        snapBehaviour.damping = 0.5
         
-        UIView.animate(withDuration: 0.1, animations: {
-            self.backgroundView.alpha = 1.0
-        }, completion: { (finished) in
-            self.addGesture()
-        })
+        self.backgroundView.alpha = 0.0
+        self.alertView.isHidden = true
+        self.alertView.center.x = keyWindow?.center.x ?? 160
+        self.alertView.alpha = 0.0
+        
+        UIView.animate(withDuration: 0.15, delay: 0, options: [.curveEaseInOut], animations: {[weak self] in
+            self?.backgroundView.alpha = 1.0
+            self?.alertView.alpha = 1.0
+        }) {[weak self] (isFinished) in
+            self?.alertView.isHidden = false
+            self?.animator?.addBehavior(snapBehaviour)
+            self?.addGesture()
+        }
     }
     
-    public func dismiss() {
+    public func dismiss(animated:Bool) {
         let keyWindow = UIApplication.shared.keyWindow
         self.animator?.removeAllBehaviors()
         
+        if animated {
         UIView.perform(.delete, on: [self.alertView], options: .curveEaseInOut, animations: {[weak self] in
             self?.backgroundView.alpha = 0.0
             keyWindow?.tintAdjustmentMode = .automatic
@@ -516,6 +531,12 @@ class AUAlertMessage: UIView {
             },completion: {[weak self] (finished) in
                 self?.removeFromSuperview()
         })
+        }
+        else {
+            keyWindow?.tintAdjustmentMode = .automatic
+            keyWindow?.tintColorDidChange()
+            self.removeFromSuperview()
+        }
     }
     
     public func cancelButtonIndex() -> Int {
