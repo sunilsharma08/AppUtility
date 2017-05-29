@@ -81,6 +81,20 @@ open class AUAlertView: UIView {
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        fatalError("AUAlertView \(#function) not implemeted")
+    }
+    
+    /**
+     Class method to show alertview.
+     */
+    public class func showAlertView(_ title:String?, message:String?, cancelButtonTitle:String?) {
+        let alertview = AUAlertView(title: title, message: message)
+        
+        if let cancelTitle = cancelButtonTitle {
+            let cancelButton = AUAlertAction(title: cancelTitle , style: .cancel)
+            alertview.addAction(cancelButton)
+        }
+        alertview.show()
     }
     
     private func setupAlertView() {
@@ -244,7 +258,7 @@ open class AUAlertView: UIView {
         buttonScrollView.contentSize = CGSize(width: buttonScrollView.frame.size.width, height: buttonYOffset + buttonHeight + CGFloat(paddingBetweenButton))
     }
     
-    func configActionButtons(button: AUButton, action:AUAlertAction) {
+    private func configActionButtons(button: AUButton, action:AUAlertAction) {
         switch action.style ?? .default {
         case .default:
             configDefaultButton(button: button, action: action)
@@ -255,17 +269,17 @@ open class AUAlertView: UIView {
         }
     }
     
-    func configCancelButton(button:AUButton, action:AUAlertAction) {
+    private func configCancelButton(button:AUButton, action:AUAlertAction) {
         configDefaultButton(button: button, action: action)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
     }
     
-    func configDestructiveButton(button:AUButton, action:AUAlertAction) {
+    private func configDestructiveButton(button:AUButton, action:AUAlertAction) {
         configDefaultButton(button: button, action: action)
         button.setTitleColor(UIColor.red, for: .normal)
     }
     
-    func configDefaultButton(button:AUButton, action:AUAlertAction) {
+    private func configDefaultButton(button:AUButton, action:AUAlertAction) {
         button.layer.cornerRadius = 2
         button.clipsToBounds = true
         button.titleLabel?.minimumScaleFactor = 0.8
@@ -441,7 +455,6 @@ open class AUAlertView: UIView {
     }
     
     private func dismissAlertViewWithFlick(_ velocity:CGPoint) {
-        print(#function)
         self.alertViewIsFlickingAwayForDismissal = true
         let push = UIPushBehavior.init(items: [self], mode: .instantaneous)
         push.pushDirection = CGVector.init(dx: velocity.x * 0.1, dy: velocity.y * 0.1)
@@ -608,17 +621,12 @@ open class AUAlertView: UIView {
         }
     }
     
-    func configAfterAlertViewDismiss() {
+    private func configAfterAlertViewDismiss() {
         let keyWindow = UIApplication.shared.keyWindow
         keyWindow?.tintAdjustmentMode = .automatic
         keyWindow?.tintColorDidChange()
         self.backgroundView.removeFromSuperview()
         self.removeFromSuperview()
-    }
-    
-    public func showAlertView(_ title:String?, message:String?, cancelButtonTitle:String?) {
-        let alert = UIAlertView.init(title: title, message: message, delegate: nil, cancelButtonTitle: cancelButtonTitle)
-        alert.show()
     }
 }
 
