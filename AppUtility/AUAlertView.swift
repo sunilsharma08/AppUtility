@@ -276,7 +276,7 @@ open class AUAlertView: UIView {
         button.backgroundColor = UIColor.clear
         button.contentEdgeInsets = UIEdgeInsets(top: button.contentEdgeInsets.top, left: contentEdgeInsets.left, bottom: button.contentEdgeInsets.bottom, right: contentEdgeInsets.right)
         button.didTouchUpInside = {[weak action, weak self] (sender) in
-            DispatchQueue.main.async {
+            DispatchQueue.main.safeAsync {
                 self?.dismiss()
                 action?.handler?(action ?? AUAlertAction())
             }
@@ -620,7 +620,6 @@ open class AUAlertView: UIView {
         let alert = UIAlertView.init(title: title, message: message, delegate: nil, cancelButtonTitle: cancelButtonTitle)
         alert.show()
     }
-    
 }
 
 public enum AUAlertActionStyle : Int {
