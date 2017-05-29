@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,AUAlertMessageDelegate,UIScrollViewDelegate {
+class ViewController: UIViewController,UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,13 +117,30 @@ class ViewController: UIViewController,AUAlertMessageDelegate,UIScrollViewDelega
     }
 
     func showAlertButtonPressed(_ sender: UIButton) {
-        let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: "Cancel", otherButtonTitles: "Other","Other2")
-        aumessage.delegate = self
-        aumessage.show()
         
-//        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
+        
+        let alllert = AUAlertView(title: "tirknkn", message: "kkbjbkb")
+        let button = AUAlertAction(title: "Button", style: .cancel)
+        let button1 = AUAlertAction(title: "hkhkknl", style: .default) { (action) in
+            print(action.title ?? "title is nil")
+        }
+        
+        alllert.addAction(button)
+        alllert.addAction(button1)
+        alllert.show()
+    }
+    
+    func setBlurredView(_ view:UIView, blurEffectStyle:UIBlurEffectStyle) {
+        if !UIAccessibilityIsReduceMotionEnabled() {
+            let blurEffect = UIBlurEffect(style: blurEffectStyle)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            blurEffectView.frame = (view.bounds)
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            view.addSubview(blurEffectView)
+        }
+        else {
+            view.layer.backgroundColor = UIColor.clear.cgColor
+        }
     }
     
     func auAlertMessageClickedOn(button: UIButton, index: Int, title: String) {
@@ -155,10 +172,10 @@ class ViewController: UIViewController,AUAlertMessageDelegate,UIScrollViewDelega
     func netCheckButtonPressed(_ sender: UIButton) {
         //Checking internet connection
         if AUReachability.sharedInstance.isNetworkReachable() {
-            AUAlertMessage().showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
+            AUAlertView().showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
         }
         else {
-            AUAlertMessage().showAlertView(nil, message: "Not Connected", cancelButtonTitle: "Cancel")
+            AUAlertView().showAlertView(nil, message: "Not Connected", cancelButtonTitle: "Cancel")
         }
     }
 
