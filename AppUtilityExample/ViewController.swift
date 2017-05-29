@@ -120,10 +120,10 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         
         let alllert = AUAlertView(title: "Title", message: "Message description")
         let button = AUAlertAction(title: "Cancel", style: .cancel){ (action) in
-            print("Clicked on button\(action.title ?? "title is nil")")
+            print("Clicked on button \(action.title ?? "title is nil")")
         }
         let button1 = AUAlertAction(title: "Ok", style: .default) { (action) in
-            print("Clicked on button\(action.title ?? "title is nil")")
+            print("Clicked on button \(action.title ?? "title is nil")")
         }
         
         alllert.addAction(button)
