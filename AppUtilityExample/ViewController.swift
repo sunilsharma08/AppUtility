@@ -118,6 +118,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 
     func showAlertButtonPressed(_ sender: UIButton) {
         
+        
         let alllert = AUAlertView(title: "tirknkn", message: "kkbjbkb")
         let button = AUAlertAction(title: "Button", style: .cancel)
         let button1 = AUAlertAction(title: "hkhkknl", style: .default) { (action) in

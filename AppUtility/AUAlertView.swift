@@ -54,15 +54,19 @@ open class AUAlertView: UIView {
     
     //Contain alertview message
     open var message: String?
-    private lazy var messageScrollView = UIScrollView()
+    
+    ///Contain title and message label
+    private lazy var headerScrollView = UIScrollView()
+    ///Contain all alertview buttons
     private lazy var buttonScrollView = UIScrollView()
+    ///Array of all alertview actions
     lazy open private(set) var actions: [AUAlertAction] = []
     
+    ///Calculate alertview max height allowed in iPhone screen
     private let alertViewMaxHeight = UIScreen.main.bounds.height - (UIApplication.shared.statusBarFrame.size.height + UITabBarController().tabBar.frame.size.height + UINavigationController().navigationBar.frame.size.height)
     
     public init() {
         super.init(frame: CGRect.zero)
-        initialSetup()
     }
     
     public convenience init(title: String?, message: String?) {
@@ -73,17 +77,10 @@ open class AUAlertView: UIView {
     
     private override init(frame: CGRect) {
         super.init(frame: frame)
-        initialSetup()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        initialSetup()
-    }
-    
-    private func initialSetup(){
-        self.backgroundColor = UIColor.clear
-        self.isUserInteractionEnabled = true
     }
     
     private func setupAlertView() {
@@ -103,7 +100,7 @@ open class AUAlertView: UIView {
         self.tintAdjustmentMode = .normal
         self.isUserInteractionEnabled  = true
         
-        self.messageScrollView.showsHorizontalScrollIndicator = false
+        self.headerScrollView.showsHorizontalScrollIndicator = false
         self.buttonScrollView.showsHorizontalScrollIndicator = false
     }
     
@@ -138,8 +135,8 @@ open class AUAlertView: UIView {
     }
     
     private func addAlertViewElements() {
-        self.messageScrollView.frame.size.width = self.frame.size.width
-        self.messageScrollView.contentSize.width = self.messageScrollView.frame.size.width
+        self.headerScrollView.frame.size.width = self.frame.size.width
+        self.headerScrollView.contentSize.width = self.headerScrollView.frame.size.width
         
         if let titleString = title {
             addTitleLabel(title: titleString)
@@ -150,8 +147,8 @@ open class AUAlertView: UIView {
         }
         
         if self.title != nil || self.message != nil {
-            self.messageScrollView.frame.origin = CGPoint.zero
-            self.addSubview(messageScrollView)
+            self.headerScrollView.frame.origin = CGPoint.zero
+            self.addSubview(headerScrollView)
         }
         if actions.count > 0 {
             self.addActionButtons()
@@ -161,8 +158,8 @@ open class AUAlertView: UIView {
         
         ///Check whether Title and message are present or not. If present then add separator line for message and buttons.
         if (title != nil || message != nil) && (actions.count != 0) {
-            let frame = CGRect(x: 0.0, y: messageScrollView.frame.size.height - 0.5, width: self.frame.size.width, height: 0.5)
-            addSublayerLine(frame: frame, onView: messageScrollView)
+            let frame = CGRect(x: 0.0, y: headerScrollView.frame.size.height - 0.5, width: self.frame.size.width, height: 0.5)
+            addSublayerLine(frame: frame, onView: headerScrollView)
         }
     }
     
@@ -299,30 +296,30 @@ open class AUAlertView: UIView {
     
     private func resizeAlertViewHeight() {
         
-        messageScrollView.frame.origin = CGPoint.zero
+        headerScrollView.frame.origin = CGPoint.zero
         
-        if (messageScrollView.contentSize.height + buttonScrollView.contentSize.height) > alertViewMaxHeight {
+        if (headerScrollView.contentSize.height + buttonScrollView.contentSize.height) > alertViewMaxHeight {
             let tempButtonsSVHeight = actions.count > 1 ? buttonHeight + buttonHeight / 2 : buttonHeight
-            if messageScrollView.contentSize.height > (alertViewMaxHeight - tempButtonsSVHeight) {
-                messageScrollView.frame.size.height = alertViewMaxHeight - tempButtonsSVHeight
-                buttonScrollView.frame.origin.y = messageScrollView.frame.size.height
+            if headerScrollView.contentSize.height > (alertViewMaxHeight - tempButtonsSVHeight) {
+                headerScrollView.frame.size.height = alertViewMaxHeight - tempButtonsSVHeight
+                buttonScrollView.frame.origin.y = headerScrollView.frame.size.height
                 buttonScrollView.frame.size.height = tempButtonsSVHeight
             }
             else {
-                messageScrollView.frame.size.height = messageScrollView.contentSize.height
-                buttonScrollView.frame.origin.y = messageScrollView.frame.size.height
-                buttonScrollView.frame.size.height = alertViewMaxHeight - messageScrollView.frame.size.height
+                headerScrollView.frame.size.height = headerScrollView.contentSize.height
+                buttonScrollView.frame.origin.y = headerScrollView.frame.size.height
+                buttonScrollView.frame.size.height = alertViewMaxHeight - headerScrollView.frame.size.height
             }
             self.frame.size.height = alertViewMaxHeight
         }
         else{
-            self.frame.size.height = messageScrollView.contentSize.height + buttonScrollView.contentSize.height
+            self.frame.size.height = headerScrollView.contentSize.height + buttonScrollView.contentSize.height
             if self.frame.size.height <= 0 {
                 self.frame.size.height = 100
             }
-            messageScrollView.frame.size.height = messageScrollView.contentSize.height
+            headerScrollView.frame.size.height = headerScrollView.contentSize.height
             
-            buttonScrollView.frame.origin.y = messageScrollView.frame.size.height
+            buttonScrollView.frame.origin.y = headerScrollView.frame.size.height
             buttonScrollView.frame.size.height = buttonScrollView.contentSize.height
         }
     }
@@ -330,8 +327,8 @@ open class AUAlertView: UIView {
     private func addMessageLabel(message: String) {
         let messageLabel = UILabel()
         let topPadding:CGFloat = title == nil ? contentEdgeInsets.top : 0
-        let lastViewFrame = getLastViewFrame(view: self.messageScrollView)
-        messageLabel.frame = CGRect(x: contentEdgeInsets.left, y: lastViewFrame.origin.y + lastViewFrame.size.height + topPadding , width: self.messageScrollView.frame.size.width - (contentEdgeInsets.left + contentEdgeInsets.right), height: 0)
+        let lastViewFrame = getLastViewFrame(view: self.headerScrollView)
+        messageLabel.frame = CGRect(x: contentEdgeInsets.left, y: lastViewFrame.origin.y + lastViewFrame.size.height + topPadding , width: self.headerScrollView.frame.size.width - (contentEdgeInsets.left + contentEdgeInsets.right), height: 0)
         messageLabel.text = message
         messageLabel.backgroundColor = UIColor.clear
         messageLabel.textColor = UIColor.black
@@ -340,13 +337,13 @@ open class AUAlertView: UIView {
         messageLabel.lineBreakMode = .byWordWrapping
         messageLabel.numberOfLines = 0
         messageLabel.frame.size.height = ceil(messageLabel.text?.heightWithConstrainedWidth(self.frame.size.width, font: messageLabel.font) ?? 0.0) + 6
-        self.messageScrollView.addSubview(messageLabel)
-        self.messageScrollView.contentSize.height += topPadding + messageLabel.frame.size.height + contentEdgeInsets.bottom
+        self.headerScrollView.addSubview(messageLabel)
+        self.headerScrollView.contentSize.height += topPadding + messageLabel.frame.size.height + contentEdgeInsets.bottom
     }
     
     private func addTitleLabel(title: String) {
         let titleLabel = UILabel()
-        titleLabel.frame = CGRect(x: contentEdgeInsets.left, y: contentEdgeInsets.top , width: self.messageScrollView.frame.size.width - (contentEdgeInsets.left + contentEdgeInsets.right), height: 0)
+        titleLabel.frame = CGRect(x: contentEdgeInsets.left, y: contentEdgeInsets.top , width: self.headerScrollView.frame.size.width - (contentEdgeInsets.left + contentEdgeInsets.right), height: 0)
         titleLabel.text = title
         titleLabel.backgroundColor = UIColor.clear
         titleLabel.textColor = UIColor.black
@@ -355,9 +352,9 @@ open class AUAlertView: UIView {
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 0
         titleLabel.frame.size.height = ceil(titleLabel.text?.heightWithConstrainedWidth(self.frame.size.width, font: titleLabel.font) ?? 0.0) + 2
-        self.messageScrollView.addSubview(titleLabel)
+        self.headerScrollView.addSubview(titleLabel)
         let bottomPadding = message == nil ? contentEdgeInsets.bottom : 0
-        self.messageScrollView.contentSize.height += titleLabel.frame.origin.y + titleLabel.frame.size.height + bottomPadding
+        self.headerScrollView.contentSize.height += titleLabel.frame.origin.y + titleLabel.frame.size.height + bottomPadding
     }
     
     private func addSublayerLine(frame:CGRect, onView view:UIView) {
