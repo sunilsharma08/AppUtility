@@ -13,15 +13,41 @@ import UIKit
  Enum to describe AlertView background.
  */
 public enum AUBackgroundOptions {
-    case BlurEffectExtraLight
-    case BlurEffectLight
-    case BlurEffectDark
-    case Dark
-    case Gray
-    case None
+    case blurEffectExtraLight
+    case blurEffectLight
+    case blurEffectDark
+    case dark
+    case gray
+    case none
+}
+
+/**
+ Enum for Alertview button style.
+ */
+public enum AUAlertActionStyle : Int {
+    case `default`
+    case cancel
+    case destructive
+}
+
+/**
+ Enum for Alertview presenting animation
+ */
+public enum AUAlertAnimationType {
+    case snapBehaviour
+    case popUp
 }
 
 open class AUAlertView: UIView {
+    
+    //Contain alertview title
+    open var title: String?
+    
+    //Contain alertview message
+    open var message: String?
+    
+    ///Array of all alertview actions
+    lazy open private(set) var actions: [AUAlertAction] = []
     
     public let backgroundView = UIView()
     
@@ -35,8 +61,11 @@ open class AUAlertView: UIView {
     public var dismissOnBackgroundTouch:Bool = true
     
     //Give option to select different alertview background.
-    public var backgroundType:AUBackgroundOptions = .Gray
+    public var backgroundType:AUBackgroundOptions = .gray
     
+    public var alertViewAnimationType:AUAlertAnimationType = .snapBehaviour
+    
+    //Private properties
     private var animator:UIDynamicAnimator? = nil
     private var attachmentBehaviour:UIAttachmentBehavior? = nil
     private var alertViewDragStartPoint:CGPoint? = nil
@@ -49,18 +78,10 @@ open class AUAlertView: UIView {
     private let minimumFlickDismissalVelocity:Float = 1000.0
     private var contentEdgeInsets = UIEdgeInsets.init(top: 14, left: 10, bottom: 14, right: 10)
     
-    //Contain alertview title
-    open var title: String?
-    
-    //Contain alertview message
-    open var message: String?
-    
     ///Contain title and message label
     private lazy var headerScrollView = UIScrollView()
     ///Contain all alertview buttons
     private lazy var buttonScrollView = UIScrollView()
-    ///Array of all alertview actions
-    lazy open private(set) var actions: [AUAlertAction] = []
     
     ///Calculate alertview max height allowed in iPhone screen
     private let alertViewMaxHeight = UIScreen.main.bounds.height - (UIApplication.shared.statusBarFrame.size.height + UITabBarController().tabBar.frame.size.height + UINavigationController().navigationBar.frame.size.height)
@@ -89,6 +110,7 @@ open class AUAlertView: UIView {
      */
     public class func showAlertView(_ title:String?, message:String?, cancelButtonTitle:String?) {
         let alertview = AUAlertView(title: title, message: message)
+        alertview.alertViewAnimationType = .popUp
         
         if let cancelTitle = cancelButtonTitle {
             let cancelButton = AUAlertAction(title: cancelTitle , style: .cancel)
@@ -120,17 +142,17 @@ open class AUAlertView: UIView {
     
     private func setBackgroundEffect(view:UIView, blurStyle:AUBackgroundOptions) {
         switch blurStyle {
-        case .Dark:
+        case .dark:
             view.layer.backgroundColor = UIColor.black.withAlphaComponent(0.8).cgColor
-        case .BlurEffectDark:
+        case .blurEffectDark:
             self.setBlurredView(view,blurEffectStyle: .dark)
-        case .BlurEffectLight:
+        case .blurEffectLight:
             self.setBlurredView(view,blurEffectStyle: .light)
-        case .BlurEffectExtraLight:
+        case .blurEffectExtraLight:
             self.setBlurredView(view,blurEffectStyle: .extraLight)
-        case .Gray:
+        case .gray:
             view.layer.backgroundColor = UIColor.black.withAlphaComponent(0.35).cgColor
-        case .None:
+        case .none:
             view.layer.backgroundColor = UIColor.clear.cgColor
         }
     }
@@ -574,23 +596,37 @@ open class AUAlertView: UIView {
         keyWindow.addSubview(backgroundView)
         keyWindow.addSubview(self)
         animator?.removeAllBehaviors()
-        /// Just to clear previous instance reference before creating new instance.
+        /// To clear previous instance reference before creating new instance.
         self.animator = nil
         self.animator = UIDynamicAnimator.init(referenceView: keyWindow)
-        
-        let snapBehaviour = UISnapBehavior.init(item: self, snapTo: keyWindow.center)
-        snapBehaviour.damping = 0.5
-        
-        self.backgroundView.alpha = 0.0
-        self.isHidden = true
+        var snapBehaviour: UISnapBehavior?
+        switch alertViewAnimationType {
+        case .snapBehaviour:
+            snapBehaviour = UISnapBehavior.init(item: self, snapTo: keyWindow.center)
+            snapBehaviour?.damping = 0.5
+            self.isHidden = true
+        case .popUp:
+            self.center.y = keyWindow.center.y
+            self.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            self.isHidden = false
+            break
+        }
         self.center.x = keyWindow.center.x
+        self.backgroundView.isHidden = true
         self.alpha = 0.0
         
-        UIView.animate(withDuration: 0.15, delay: 0, options: [.curveEaseInOut], animations: {[weak self] in
-            self?.backgroundView.alpha = 1.0
-            self?.alpha = 1.0        }) {[weak self] (isFinished) in
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseInOut], animations: {[weak self] in
+            self?.backgroundView.isHidden = false
+            self?.alpha = 1.0
             self?.isHidden = false
-            self?.animator?.addBehavior(snapBehaviour)
+            switch self?.alertViewAnimationType ?? .snapBehaviour {
+            case .snapBehaviour:
+                self?.animator?.addBehavior(snapBehaviour!)
+            case .popUp:
+                self?.transform = .identity
+                break
+            }
+        }) {[weak self] (isFinished) in
             self?.addGesture()
         }
     }
@@ -603,7 +639,7 @@ open class AUAlertView: UIView {
         self.animator?.removeAllBehaviors()
         
         if animated {
-            UIView.perform(.delete, on: [self], options: .curveEaseInOut, animations: {[weak self] in
+            UIView.perform(.delete, on: [self], options: [.curveEaseInOut , .transitionCrossDissolve], animations: {[weak self] in
                 self?.backgroundView.alpha = 0.0
                 },completion: {[weak self] (finished) in
                     self?.configAfterAlertViewDismiss()
@@ -611,7 +647,7 @@ open class AUAlertView: UIView {
         }
         else {
             
-            UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState], animations: {[weak self] in
+            UIView.animate(withDuration: 0.15, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState], animations: {[weak self] in
                 self?.backgroundView.alpha = 0.0
                 self?.alpha = 0.0
                 }, completion: {[weak self] (isFinished) in
@@ -628,13 +664,6 @@ open class AUAlertView: UIView {
         self.backgroundView.removeFromSuperview()
         self.removeFromSuperview()
     }
-}
-
-public enum AUAlertActionStyle : Int {
-    
-    case `default`
-    case cancel
-    case destructive
 }
 
 open class AUAlertAction: NSObject {
