@@ -40,13 +40,13 @@ public enum AUAlertAnimationType {
 
 open class AUAlertView: UIView {
     
-    //Contain alertview title
+    //Contain alertview title.
     open var title: String?
     
-    //Contain alertview message
+    //Contain alertview message.
     open var message: String?
     
-    ///Array of all alertview actions
+    ///Array of all alertview actions.
     lazy open private(set) var actions: [AUAlertAction] = []
     
     public let backgroundView = UIView()
@@ -65,25 +65,28 @@ open class AUAlertView: UIView {
     
     public var alertViewAnimationType:AUAlertAnimationType = .snapBehaviour
     
+    //Allow to dismiss alertview by flick or not.
+    public var shouldDismissAlertViewByFlick = true
+    
+    //Allow to pan gesture on alertview or not
+    public var isPanGestureEnabled = true
+    
     //Private properties
     private var animator:UIDynamicAnimator? = nil
     private var attachmentBehaviour:UIAttachmentBehavior? = nil
     private var alertViewDragStartPoint:CGPoint? = nil
     private var alertViewDragOffsetFromActualTranslation:UIOffset? = nil
     private var alertViewDragOffsetFromCenter:UIOffset? = nil
-    
-    /// Tells whether alertview is dismissed by flick or not.
-    private var alertViewIsFlickingAwayForDismissal = false
     private var isDraggingAlertView = false
     private let minimumFlickDismissalVelocity:Float = 1000.0
     private var contentEdgeInsets = UIEdgeInsets.init(top: 14, left: 10, bottom: 14, right: 10)
     
-    ///Contain title and message label
+    ///Contain title and message label.
     private lazy var headerScrollView = UIScrollView()
-    ///Contain all alertview buttons
+    ///Contain all alertview buttons.
     private lazy var buttonScrollView = UIScrollView()
     
-    ///Calculate alertview max height allowed in iPhone screen
+    ///Calculate alertview max height allowed in iPhone screen.
     private let alertViewMaxHeight = UIScreen.main.bounds.height - (UIApplication.shared.statusBarFrame.size.height + UITabBarController().tabBar.frame.size.height + UINavigationController().navigationBar.frame.size.height)
     
     public init() {
@@ -409,14 +412,15 @@ open class AUAlertView: UIView {
         self.backgroundView.isMultipleTouchEnabled = false
         self.backgroundView.addGestureRecognizer(tapGestureRecogniser)
         
+        if isPanGestureEnabled {
         //Pan Gesture
         let panRecogniser = UIPanGestureRecognizer.init(target: self, action: #selector(dismissingPanGestureRecogniserPanned(_:)))
         panRecogniser.maximumNumberOfTouches = 1
         self.addGestureRecognizer(panRecogniser)
+        }
     }
     
     @objc private func dismissingPanGestureRecogniserPanned(_ panner:UIPanGestureRecognizer) {
-        
         let translation = panner.translation(in: self.superview)
         let locationInView = panner.location(in: self.superview)
         let velocity = panner.velocity(in: self.superview)
@@ -444,7 +448,7 @@ open class AUAlertView: UIView {
             }
         }
         else {
-            if (vectorDistance > minimumFlickDismissalVelocity){
+            if (vectorDistance > minimumFlickDismissalVelocity) && shouldDismissAlertViewByFlick {
                 if isDraggingAlertView {
                     self.dismissAlertViewWithFlick(velocity)
                 }
@@ -477,7 +481,6 @@ open class AUAlertView: UIView {
     }
     
     private func dismissAlertViewWithFlick(_ velocity:CGPoint) {
-        self.alertViewIsFlickingAwayForDismissal = true
         let push = UIPushBehavior.init(items: [self], mode: .instantaneous)
         push.pushDirection = CGVector.init(dx: velocity.x * 0.1, dy: velocity.y * 0.1)
         push.setTargetOffsetFromCenter(self.alertViewDragOffsetFromCenter!, for: self)
