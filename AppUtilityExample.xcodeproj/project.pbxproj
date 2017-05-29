@@ -25,6 +25,7 @@
 		18A443C31E643C0A00E19E27 /* AUString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443BA1E643C0A00E19E27 /* AUString.swift */; };
 		18A443C41E643C0A00E19E27 /* AUTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A443BB1E643C0A00E19E27 /* AUTextField.swift */; };
 		18BCAD1A1EDBF41E00CDED58 /* AUButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCAD191EDBF41E00CDED58 /* AUButton.swift */; };
+		18BCAD1C1EDC006C00CDED58 /* AUDispatchQueueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BCAD1B1EDC006C00CDED58 /* AUDispatchQueueExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		18A443BA1E643C0A00E19E27 /* AUString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUString.swift; sourceTree = "<group>"; };
 		18A443BB1E643C0A00E19E27 /* AUTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUTextField.swift; sourceTree = "<group>"; };
 		18BCAD191EDBF41E00CDED58 /* AUButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUButton.swift; sourceTree = "<group>"; };
+		18BCAD1B1EDC006C00CDED58 /* AUDispatchQueueExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AUDispatchQueueExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				18A443BB1E643C0A00E19E27 /* AUTextField.swift */,
 				181672C81E67101000A1EE57 /* AUView.swift */,
 				18BCAD191EDBF41E00CDED58 /* AUButton.swift */,
+				18BCAD1B1EDC006C00CDED58 /* AUDispatchQueueExtension.swift */,
 			);
 			path = AppUtility;
 			sourceTree = SOURCE_ROOT;
@@ -266,6 +269,7 @@
 				181672C91E67101000A1EE57 /* AUView.swift in Sources */,
 				18A443BE1E643C0A00E19E27 /* AUDate.swift in Sources */,
 				18A443C01E643C0A00E19E27 /* AUImageView.swift in Sources */,
+				18BCAD1C1EDC006C00CDED58 /* AUDispatchQueueExtension.swift in Sources */,
 				18BCAD1A1EDBF41E00CDED58 /* AUButton.swift in Sources */,
 				18A443BF1E643C0A00E19E27 /* AUImage.swift in Sources */,
 				18A443BC1E643C0A00E19E27 /* AUAlertView.swift in Sources */,

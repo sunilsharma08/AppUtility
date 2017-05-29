@@ -118,29 +118,17 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 
     func showAlertButtonPressed(_ sender: UIButton) {
         
-        
-        let alllert = AUAlertView(title: "tirknkn", message: "kkbjbkb")
-        let button = AUAlertAction(title: "Button", style: .cancel)
-        let button1 = AUAlertAction(title: "hkhkknl", style: .default) { (action) in
-            print(action.title ?? "title is nil")
+        let alllert = AUAlertView(title: "Title", message: "Message description")
+        let button = AUAlertAction(title: "Cancel", style: .cancel){ (action) in
+            print("Clicked on button\(action.title ?? "title is nil")")
+        }
+        let button1 = AUAlertAction(title: "Ok", style: .default) { (action) in
+            print("Clicked on button\(action.title ?? "title is nil")")
         }
         
         alllert.addAction(button)
         alllert.addAction(button1)
         alllert.show()
-    }
-    
-    func setBlurredView(_ view:UIView, blurEffectStyle:UIBlurEffectStyle) {
-        if !UIAccessibilityIsReduceMotionEnabled() {
-            let blurEffect = UIBlurEffect(style: blurEffectStyle)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            blurEffectView.frame = (view.bounds)
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            view.addSubview(blurEffectView)
-        }
-        else {
-            view.layer.backgroundColor = UIColor.clear.cgColor
-        }
     }
     
     func auAlertMessageClickedOn(button: UIButton, index: Int, title: String) {
@@ -172,10 +160,10 @@ class ViewController: UIViewController,UIScrollViewDelegate {
     func netCheckButtonPressed(_ sender: UIButton) {
         //Checking internet connection
         if AUReachability.sharedInstance.isNetworkReachable() {
-            AUAlertView().showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
+            AUAlertView.showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
         }
         else {
-            AUAlertView().showAlertView(nil, message: "Not Connected", cancelButtonTitle: "Cancel")
+            AUAlertView.showAlertView(nil, message: "Not Connected", cancelButtonTitle: "Cancel")
         }
     }
 
