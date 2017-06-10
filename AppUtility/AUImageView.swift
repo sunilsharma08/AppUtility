@@ -54,6 +54,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
             }
         }
     }
+    
     var enableImageZoom = false {
         didSet {
             if enableImageZoom {
@@ -135,26 +136,29 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         closeButton.setShadowImage(UIImage(), forToolbarPosition: .any)
         
         createVisualEffectView()
-        
+    }
+    
+    func updateStatusBarToPreviousState() {
+        UIApplication.shared.keyWindow?.windowLevel = UIWindowLevelNormal
+    }
+    
+    func hideStatusBar() {
+        UIApplication.shared.keyWindow?.windowLevel = UIWindowLevelStatusBar
     }
     
     func showZoomView() {
-        
+        hideStatusBar()
         guard (self.image != nil) else {
             return
         }
-        var copyImageview = self.copyView() as? UIImageView
-        if copyImageview == nil {
-            copyImageview = UIImageView.init()
-        }
-        copyImageview?.tag = 10204
-        copyImageview?.frame.origin.x = 0
-        copyImageview?.frame.origin.y = 0
-        zoomScrollView.addSubview(copyImageview!)
+        let copyImageview = UIImageView(image: self.image)
+        copyImageview.frame = self.frame
         
-        var zoomScrollViewFrame = UIScreen.main.bounds
-        zoomScrollViewFrame.origin.y = UIApplication.shared.statusBarFrame.height
-        zoomScrollViewFrame.size.height = zoomScrollViewFrame.size.height - UIApplication.shared.statusBarFrame.height
+        copyImageview.tag = 10204
+        copyImageview.frame.origin.x = 0
+        copyImageview.frame.origin.y = 0
+        zoomScrollView.addSubview(copyImageview)
+        
         zoomScrollView.frame = self.frame
         
         if isZoomBlurBackgroundEnabled && blurEffectView != nil {
@@ -165,22 +169,36 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         else {
             zoomScrollView.backgroundColor = UIColor.black
         }
-        
         UIApplication.shared.keyWindow?.addSubview(zoomScrollView)
         self.setZoomScale(scrollView: self.zoomScrollView)
         
-        presentAnimation(copyImageview!)
-        
+        presentAnimation(copyImageview)
+    }
+    
+    func addDeviceRotationNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged(notification:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    }
+    
+    func removeDeviceRotationNotification() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+    }
+    
+    func orientationChanged (notification: NSNotification) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState], animations: {[weak self] in
+            self?.zoomScrollView.frame = UIScreen.main.bounds
+            if let scrollView = self?.zoomScrollView {
+                self?.setZoomScale(scrollView: scrollView)
+            }
+        }, completion: nil)
     }
     
     func presentAnimation(_ imageView:UIImageView, completion: ((Void) -> Void)? = nil) {
+        addDeviceRotationNotification()
         imageView.isHidden = true
         imageView.alpha = 0.0
         self.zoomScrollView.alpha = 0.0
         
-        var zoomScrollViewFrame = UIScreen.main.bounds
-        zoomScrollViewFrame.origin.y = UIApplication.shared.statusBarFrame.height
-        zoomScrollViewFrame.size.height = zoomScrollViewFrame.size.height - UIApplication.shared.statusBarFrame.height
+        let zoomScrollViewFrame = UIScreen.main.bounds
         zoomScrollView.frame = self.frame
         zoomScrollView.layer.cornerRadius = self.layer.cornerRadius
         
@@ -189,7 +207,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
             delay: 0,
             usingSpringWithDamping:0.75,
             initialSpringVelocity:0,
-            options:[.curveEaseInOut],
+            options:[.curveEaseInOut, .beginFromCurrentState],
             animations: {
                 self.zoomScrollView.layer.cornerRadius = 0
                 self.zoomScrollView.alpha = 1.0
@@ -201,7 +219,6 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
                     self.blurEffectView.isHidden = false
                     self.blurEffectView.layer.cornerRadius = 0
                     self.blurEffectView.frame = zoomScrollViewFrame
-                    
                 }
         },
             completion: { (Bool) -> Void in
@@ -209,19 +226,22 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
                 self.setZoomScale(scrollView: self.zoomScrollView)
                 let buttonWidth:CGFloat = 40.0
                 self.closeButton.frame = CGRect.init(x: self.zoomScrollView.frame.origin.x + self.self.zoomScrollView.frame.size.width - (buttonWidth + 8.0) , y: self.zoomScrollView.frame.origin.y + 8, width: buttonWidth, height: buttonWidth)
+                self.closeButton.autoresizingMask = .flexibleLeftMargin
                 UIApplication.shared.keyWindow?.addSubview(self.closeButton)
                 self.closeButton.alpha = 1.0
         })
     }
     
     func dismissAnimation(completion: ((Void) -> Void)? = nil) {
+        updateStatusBarToPreviousState()
+        removeDeviceRotationNotification()
         let imageView = self.zoomScrollView.viewWithTag(10204)
         UIView.animate(
             withDuration: 0.4,
             delay:0,
-            usingSpringWithDamping:0.8,
+            usingSpringWithDamping:0.82,
             initialSpringVelocity:0,
-            options:[.curveEaseInOut] ,
+            options:[.curveEaseInOut, .beginFromCurrentState] ,
             animations: {
                 self.closeButton.alpha = 0.0
                 self.zoomScrollView.frame = self.frame
@@ -229,7 +249,6 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
                 imageView?.layer.cornerRadius = self.layer.cornerRadius
                 self.setZoomScale(scrollView: self.zoomScrollView)
                 if self.blurEffectView != nil {
-                    self.blurEffectView.isHidden = true
                     self.blurEffectView.frame = self.frame
                     self.blurEffectView.layer.cornerRadius = self.layer.cornerRadius
                 }
@@ -243,8 +262,6 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
             }
         }
     }
-    
-    
     
     func closeZoomView(sender:UIButton) {
         dismissAnimation(completion: nil)

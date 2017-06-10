@@ -37,6 +37,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", withLoadingIndictor: true) { (status) in
             
         }
+        imageview.image = UIImage(named: "image.jpg")
         
     }
     
