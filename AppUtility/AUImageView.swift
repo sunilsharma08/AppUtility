@@ -44,9 +44,9 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
     var maximumZoomScale:CGFloat = 10.0
     var minimumZoomScale:CGFloat = -1
     var zoomScale:CGFloat = 1.0
-    var isZoomBlurBackgroundEnabled:Bool = false {
+    var blurZoomBackground:Bool = false {
         didSet {
-            if isZoomBlurBackgroundEnabled {
+            if blurZoomBackground {
                 createVisualEffectView()
             }
             else {
@@ -161,7 +161,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         
         zoomScrollView.frame = self.frame
         
-        if isZoomBlurBackgroundEnabled && blurEffectView != nil {
+        if blurZoomBackground && blurEffectView != nil {
             zoomScrollView.backgroundColor = UIColor.clear
             blurEffectView.frame = zoomScrollView.frame
             UIApplication.shared.keyWindow?.addSubview(blurEffectView)
