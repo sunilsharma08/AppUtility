@@ -28,7 +28,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         self.view.addSubview(imageview)
         imageview.isUserInteractionEnabled = true
         imageview.enableImageZoom = true
-        imageview.blurZoomBackground = true
+        imageview.blurZoomBackground = false
         imageview.clipsToBounds = true
         //imageview.layer.cornerRadius = 100
         //imageview.image = UIImage(named: "image.jpg")

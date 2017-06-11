@@ -128,11 +128,13 @@ open class AUAlertView: UIView {
         let keyWindowFrame = keyWindow?.bounds ?? CGRect.zero
         
         backgroundView.frame = keyWindowFrame
+        backgroundView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.setBackgroundEffect(view: backgroundView, blurStyle: backgroundType)
+        let windowWidth = keyWindowFrame.width > keyWindowFrame.height ? keyWindowFrame.height : keyWindowFrame.width
         
-        let alertViewHorizontalPadding:CGFloat = 0.125 * keyWindowFrame.size.width
+        let alertViewHorizontalPadding:CGFloat = 0.125 * windowWidth
         
-        self.frame = CGRect(x: alertViewHorizontalPadding / 2, y: 20, width: keyWindowFrame.size.width - alertViewHorizontalPadding, height: 100)
+        self.frame = CGRect(x: alertViewHorizontalPadding / 2, y: 20, width: windowWidth - alertViewHorizontalPadding, height: 100)
         self.backgroundColor = UIColor.white
         self.layer.cornerRadius = self.cornerRadius
         self.layer.masksToBounds = true
@@ -535,8 +537,8 @@ open class AUAlertView: UIView {
         let referenceArea = keyWindow.bounds.size.width * keyWindow.bounds.size.height
         let factor = referenceArea / actualArea
         
-        let screenWidth = UIScreen.main.bounds.size.width
-        let screenHeight = UIScreen.main.bounds.size.height
+        let screenWidth = keyWindow.bounds.size.width
+        let screenHeight = keyWindow.bounds.size.height
         let resistance = defaultResistance * ((320.0 * 480.0) / (screenWidth * screenHeight))
         return resistance * factor
     }
@@ -552,8 +554,8 @@ open class AUAlertView: UIView {
         let referenceArea = keyWindow.bounds.size.width * keyWindow.bounds.size.height
         let factor = referenceArea / actualArea
         
-        let screenWidth = UIScreen.main.bounds.size.width
-        let screenHeight = UIScreen.main.bounds.size.height
+        let screenWidth = keyWindow.bounds.size.width
+        let screenHeight = keyWindow.bounds.size.height
         let appropriateDensity = defaultDensity * ((320.0 * 480.0) / (screenWidth * screenHeight))
         return appropriateDensity * factor
     }
@@ -587,6 +589,24 @@ open class AUAlertView: UIView {
         return isValid
     }
     
+    func addDeviceRotationNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(orientationChanged(notification:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+    }
+    
+    func removeDeviceRotationNotification() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+    }
+    
+    func orientationChanged (notification: NSNotification) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState], animations: {[weak self] in
+            if let keyWindow = UIApplication.shared.keyWindow {
+                self?.animator?.removeAllBehaviors()
+                self?.center = keyWindow.center
+                print(keyWindow.center)
+            }
+        }, completion: nil)
+    }
+    
     public func show() {
         
         guard let keyWindow = UIApplication.shared.keyWindow else {
@@ -595,6 +615,7 @@ open class AUAlertView: UIView {
         
         setupAlertView()
         addAlertViewElements()
+        addDeviceRotationNotification()
         
         keyWindow.addSubview(backgroundView)
         keyWindow.addSubview(self)
@@ -640,6 +661,7 @@ open class AUAlertView: UIView {
     
     private func dismissWithDeleteAnimation(animated:Bool) {
         self.animator?.removeAllBehaviors()
+        removeDeviceRotationNotification()
         
         if animated {
             UIView.perform(.delete, on: [self], options: [.curveEaseInOut , .transitionCrossDissolve], animations: {[weak self] in
