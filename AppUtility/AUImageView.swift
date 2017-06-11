@@ -205,7 +205,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         UIView.animate(
             withDuration: 0.6,
             delay: 0,
-            usingSpringWithDamping:0.75,
+            usingSpringWithDamping:0.8,
             initialSpringVelocity:0,
             options:[.curveEaseInOut, .beginFromCurrentState],
             animations: {
