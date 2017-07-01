@@ -1,6 +1,9 @@
 # AppUtility
 AppUtility is collection of useful code snippets that we need in almost every project like getting UIColor from hex code, checking internet connectivity, etc. extensions of Standard struct and classes and subclass of standard classes like UIImageView,String,etc.
-Goal is to make develement little easier by keeping most used methods and some common features that we expect from standard classes. These common methods we need in almost every project like converting color hex to RGB, String height, Image zoom, Internet connection check, etc. So it is try to collect all those methods in single place. Some code snippets are taken from  Stackoverflow, Github and some are added by me.
+### Little Theory
+What I found is that several time we have to repeat same steps in every project sometime even in same project and at the end increase development time. So why not we can reduce boilerplate code and make develement little easier by keeping most used methods and some common features that we expect from standard classes. These common methods we need in almost every project like converting color hex to RGB, String height, Image zoom, Internet connection check, etc. 
+
+Some code snippets are taken from  Stackoverflow, Github and some are added by me.
 
 # Installation
 Just drag the folder "AppUtility" with the source files into your project.
