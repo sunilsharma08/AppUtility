@@ -82,8 +82,3 @@ extension Date {
         return ""
     }
 }
-
-open class AUDate: NSDate {
-    
-
-}
