@@ -65,7 +65,7 @@ open class AUAlertView: UIView {
     
     public var alertViewAnimationType:AUAlertAnimationType = .snapBehaviour
     
-    //Allow to dismiss alertview by flick or not.
+    //Allow to dismiss alertview by flick or not. This work only if `isPanGestureEnabled` is enabled.
     public var shouldDismissAlertViewByFlick = true
     
     //Allow to pan gesture on alertview or not
@@ -87,7 +87,7 @@ open class AUAlertView: UIView {
     private lazy var buttonScrollView = UIScrollView()
     
     ///Calculate alertview max height allowed in iPhone screen.
-    private let alertViewMaxHeight = UIScreen.main.bounds.height - (UIApplication.shared.statusBarFrame.size.height + UITabBarController().tabBar.frame.size.height + UINavigationController().navigationBar.frame.size.height)
+    private let alertViewHeightPadding = (UIApplication.shared.statusBarFrame.size.height + UITabBarController().tabBar.frame.size.height + UINavigationController().navigationBar.frame.size.height)
     
     public init() {
         super.init(frame: CGRect.zero)
@@ -199,8 +199,8 @@ open class AUAlertView: UIView {
         
         ///Check whether Title and message are present or not. If present then add separator line for message and buttons.
         if (title != nil || message != nil) && (actions.count != 0) {
-            let frame = CGRect(x: 0.0, y: headerScrollView.frame.size.height - 0.5, width: self.frame.size.width, height: 0.5)
-            addSublayerLine(frame: frame, onView: headerScrollView)
+            let frame = CGRect(x: 0.0, y: 0, width: buttonScrollView.frame.size.width, height: 0.5)
+            addSublayerLine(frame: frame, onView: buttonScrollView)
         }
     }
     
@@ -337,10 +337,13 @@ open class AUAlertView: UIView {
     
     private func resizeAlertViewHeight() {
         
+        let alertViewMaxHeight = UIScreen.main.bounds.height - alertViewHeightPadding
+        
         headerScrollView.frame.origin = CGPoint.zero
         
         if (headerScrollView.contentSize.height + buttonScrollView.contentSize.height) > alertViewMaxHeight {
-            let tempButtonsSVHeight = actions.count > 1 ? buttonHeight + buttonHeight / 2 : buttonHeight
+            //To show one and half button when alertview height is more then allowed max height 
+            let tempButtonsSVHeight = buttonScrollView.contentSize.height > 2 * buttonHeight ? buttonHeight + buttonHeight / 2 : buttonHeight
             if headerScrollView.contentSize.height > (alertViewMaxHeight - tempButtonsSVHeight) {
                 headerScrollView.frame.size.height = alertViewMaxHeight - tempButtonsSVHeight
                 buttonScrollView.frame.origin.y = headerScrollView.frame.size.height
@@ -601,8 +604,9 @@ open class AUAlertView: UIView {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState], animations: {[weak self] in
             if let keyWindow = UIApplication.shared.keyWindow {
                 self?.animator?.removeAllBehaviors()
+                self?.resizeAlertViewHeight()
                 self?.center = keyWindow.center
-                print(keyWindow.center)
+                //print(keyWindow.center)
             }
         }, completion: nil)
     }
