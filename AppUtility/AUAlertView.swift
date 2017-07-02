@@ -52,7 +52,7 @@ open class AUAlertView: UIView {
     public let backgroundView = UIView()
     
     //Default button height.
-    public var buttonHeight:CGFloat = 45.0
+    public let buttonHeight:CGFloat = 45.0
     
     //AlertView corner radius.
     public let cornerRadius:CGFloat = 10.0
@@ -65,7 +65,7 @@ open class AUAlertView: UIView {
     
     public var alertViewAnimationType:AUAlertAnimationType = .snapBehaviour
     
-    //Allow to dismiss alertview by flick or not.
+    //Allow to dismiss alertview by flick or not. This work only if `isPanGestureEnabled` is enabled.
     public var shouldDismissAlertViewByFlick = true
     
     //Allow to pan gesture on alertview or not

@@ -120,11 +120,13 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 
     func showAlertButtonPressed(_ sender: UIButton) {
         
-        let alertView = AUAlertView(title: "Alert title Alert title Alert title Alert title v v vAlert title Alert title Alert title v Alert title Alert title Alert title Alert title v v v v v v jogeirjgosog n irgb roi kbi nrwi brin irbj bkjbgjbiergub ergjegjj wrjbrw jregjr wegjrwej girgb jrew jgiwrgjbersihgierhgj djkbkuxbcvksnvm jsdfbkudsfbgkusdhfjcb jcxb jkbiunbkjb jbciubsdfiughsigbm bjfbiudfhi8ewhfidfbvidfhgiudfgbujxfvb jj bujbv jdvbudbg jbgiudbj vhxivbdfjv b iub ui b jhviudhfgjdfihdfjb vjb iubjv ubj jbg jdhvbiudbgjdbiguhigheriubdighe9rghidsnvk kbnviuvkjgihdfibfsnfksbubd jj bjb vihdgisbjbxj xjv  hieghidsknkvxbvjbs jdbdkfj kjngskubfjs vj bj", message: "Message")
+        let alertView = AUAlertView(title: "Alert title", message: "Message")
         
         //Customisation
         alertView.backgroundType = .blurEffectLight
-        //alertView.buttonHeight = 80
+        alertView.isPanGestureEnabled = true
+        alertView.dismissOnBackgroundTouch = true
+        alertView.shouldDismissAlertViewByFlick = true
         
         let cancelButton = AUAlertAction(title: "Cancel", style: .cancel) { (action) in
             print("Clicked on cancel button")
