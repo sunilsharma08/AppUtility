@@ -120,7 +120,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         let alertView = AUAlertView(title: "Alert title", message: "Message")
         
         //Customisation
-        alertView.alertViewAnimationType = .popUp
+        alertView.alertViewAnimationType = .snapBehaviour
         alertView.backgroundType = .blurEffectLight
         alertView.isPanGestureEnabled = true
         alertView.dismissOnBackgroundTouch = true
@@ -133,8 +133,8 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         let okButton = AUAlertAction(title: "Ok", style: .default) { (action) in
             print("Clicked on OK button")
         }
-        let other = AUAlertAction(title: "Other", style: .destructive)
-        alertView.addAction(other)
+        //let other = AUAlertAction(title: "Other", style: .destructive)
+        //alertView.addAction(other)
         alertView.addAction(cancelButton)
         alertView.addAction(okButton)
         alertView.show()
