@@ -30,6 +30,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         
         //http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg
         //http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg
+        
         imageview.imageWithURL("http://www.hd-wallpapersdownload.com/download/cute-tiger-pictures-wallpaper-1024x768/", withLoadingIndictor: true) { (status) in
             if !status {
                 imageview.image = UIImage(named: "image.jpg")
