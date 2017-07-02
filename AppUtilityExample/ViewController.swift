@@ -35,10 +35,10 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         //http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg
         //http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg
         imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", withLoadingIndictor: true) { (status) in
-            
+            if !status {
+                imageview.image = UIImage(named: "image.jpg")
+            }
         }
-        imageview.image = UIImage(named: "image.jpg")
-        
     }
     
     func auDateExamples() {
@@ -120,17 +120,26 @@ class ViewController: UIViewController,UIScrollViewDelegate {
 
     func showAlertButtonPressed(_ sender: UIButton) {
         
-        let alllert = AUAlertView(title: "Title", message: "Message description")
-        let button = AUAlertAction(title: "Cancel", style: .cancel){ (action) in
-            print("Clicked on button \(action.title ?? "title is nil")")
-        }
-        let button1 = AUAlertAction(title: "Ok", style: .default) { (action) in
-            print("Clicked on button \(action.title ?? "title is nil")")
+        let alertView = AUAlertView(title: "Alert title Alert title Alert title Alert title v v vAlert title Alert title Alert title v Alert title Alert title Alert title Alert title v v v v v v jogeirjgosog n irgb roi kbi nrwi brin irbj bkjbgjbiergub ergjegjj wrjbrw jregjr wegjrwej girgb jrew jgiwrgjbersihgierhgj djkbkuxbcvksnvm jsdfbkudsfbgkusdhfjcb jcxb jkbiunbkjb jbciubsdfiughsigbm bjfbiudfhi8ewhfidfbvidfhgiudfgbujxfvb jj bujbv jdvbudbg jbgiudbj vhxivbdfjv b iub ui b jhviudhfgjdfihdfjb vjb iubjv ubj jbg jdhvbiudbgjdbiguhigheriubdighe9rghidsnvk kbnviuvkjgihdfibfsnfksbubd jj bjb vihdgisbjbxj xjv  hieghidsknkvxbvjbs jdbdkfj kjngskubfjs vj bj", message: "Message")
+        
+        //Customisation
+        alertView.backgroundType = .blurEffectLight
+        //alertView.buttonHeight = 80
+        
+        let cancelButton = AUAlertAction(title: "Cancel", style: .cancel) { (action) in
+            print("Clicked on cancel button")
         }
         
-        alllert.addAction(button)
-        alllert.addAction(button1)
-        alllert.show()
+        let okButton = AUAlertAction(title: "Ok", style: .default) { (action) in
+            print("Clicked on OK button")
+        }
+        alertView.addAction(cancelButton)
+        alertView.addAction(okButton)
+        alertView.show()
+        
+        //Show alertview with just cancel button
+        //AUAlertView.showAlertView("Alert title", message: "Message", cancelButtonTitle: "OK")
+
     }
     
     func auAlertMessageClickedOn(button: UIButton, index: Int, title: String) {

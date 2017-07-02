@@ -52,7 +52,7 @@ open class AUAlertView: UIView {
     public let backgroundView = UIView()
     
     //Default button height.
-    public let buttonHeight:CGFloat = 45.0
+    public var buttonHeight:CGFloat = 45.0
     
     //AlertView corner radius.
     public let cornerRadius:CGFloat = 10.0
@@ -199,8 +199,8 @@ open class AUAlertView: UIView {
         
         ///Check whether Title and message are present or not. If present then add separator line for message and buttons.
         if (title != nil || message != nil) && (actions.count != 0) {
-            let frame = CGRect(x: 0.0, y: headerScrollView.frame.size.height - 0.5, width: self.frame.size.width, height: 0.5)
-            addSublayerLine(frame: frame, onView: headerScrollView)
+            let frame = CGRect(x: 0.0, y: 0, width: buttonScrollView.frame.size.width, height: 0.5)
+            addSublayerLine(frame: frame, onView: buttonScrollView)
         }
     }
     
