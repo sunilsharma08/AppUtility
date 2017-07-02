@@ -87,7 +87,7 @@ open class AUAlertView: UIView {
     private lazy var buttonScrollView = UIScrollView()
     
     ///Calculate alertview max height allowed in iPhone screen.
-    private let alertViewMaxHeight = UIScreen.main.bounds.height - (UIApplication.shared.statusBarFrame.size.height + UITabBarController().tabBar.frame.size.height + UINavigationController().navigationBar.frame.size.height)
+    private let alertViewHeightPadding = (UIApplication.shared.statusBarFrame.size.height + UITabBarController().tabBar.frame.size.height + UINavigationController().navigationBar.frame.size.height)
     
     public init() {
         super.init(frame: CGRect.zero)
@@ -336,6 +336,8 @@ open class AUAlertView: UIView {
     }
     
     private func resizeAlertViewHeight() {
+        
+        let alertViewMaxHeight = UIScreen.main.bounds.height - alertViewHeightPadding
         
         headerScrollView.frame.origin = CGPoint.zero
         
@@ -601,8 +603,9 @@ open class AUAlertView: UIView {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState], animations: {[weak self] in
             if let keyWindow = UIApplication.shared.keyWindow {
                 self?.animator?.removeAllBehaviors()
+                self?.resizeAlertViewHeight()
                 self?.center = keyWindow.center
-                print(keyWindow.center)
+                //print(keyWindow.center)
             }
         }, completion: nil)
     }
