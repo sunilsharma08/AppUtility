@@ -133,6 +133,8 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         let okButton = AUAlertAction(title: "Ok", style: .default) { (action) in
             print("Clicked on OK button")
         }
+        let other = AUAlertAction(title: "Other", style: .destructive)
+        alertView.addAction(other)
         alertView.addAction(cancelButton)
         alertView.addAction(okButton)
         alertView.show()

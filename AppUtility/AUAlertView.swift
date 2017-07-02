@@ -342,7 +342,8 @@ open class AUAlertView: UIView {
         headerScrollView.frame.origin = CGPoint.zero
         
         if (headerScrollView.contentSize.height + buttonScrollView.contentSize.height) > alertViewMaxHeight {
-            let tempButtonsSVHeight = actions.count > 1 ? buttonHeight + buttonHeight / 2 : buttonHeight
+            //To show one and half button when alertview height is more then allowed max height 
+            let tempButtonsSVHeight = buttonScrollView.contentSize.height > 2 * buttonHeight ? buttonHeight + buttonHeight / 2 : buttonHeight
             if headerScrollView.contentSize.height > (alertViewMaxHeight - tempButtonsSVHeight) {
                 headerScrollView.frame.size.height = alertViewMaxHeight - tempButtonsSVHeight
                 buttonScrollView.frame.origin.y = headerScrollView.frame.size.height
