@@ -182,6 +182,13 @@ let fixImage:UIImage = image?.fixOrientation()
 ```
 
 ## AUDispatchQueueExtension (DispatchQueue Utility)
+```Swift
+    // This method will dispatch the `block` to self.
+    // If `self` is the main queue, and current thread is main thread, the block will be invoked immediately instead of being dispatched.
+    DispatchQueue.main.safeAsync {
+        //Code..
+    }
+```
 
 ## AULabel (UILabel Utility)
 ```Swift
@@ -189,16 +196,13 @@ let fixImage:UIImage = image?.fixOrientation()
   let auLabel = AULabel.init(frame:CGRect(x: 20, y: 40, width: 50, height: 30))
   //EdgeInsets to Label
   auLabel.edgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-
-  auLabel.center.x = self.view.center.x
+  
   auLabel.text = "hello"
-  auLabel.numberOfLines = 0
-  //Color from hex string
-  auLabel.backgroundColor = UIColor.init(hexCode: "0xfff")
   self.view.addSubview(auLabel)
 ```
 
 ## AUReachability (Network Utility)
+Easy way to check internet connection.
 ```Swift
     if AUReachability.sharedInstance.isNetworkReachable() {
         AUAlertView.showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
