@@ -41,10 +41,10 @@ extension UIImageView {
 
 class AUImageView: UIImageView,UIScrollViewDelegate {
     
-    var maximumZoomScale:CGFloat = 10.0
-    var minimumZoomScale:CGFloat = -1
-    var zoomScale:CGFloat = 1.0
-    var blurZoomBackground:Bool = false {
+    public var maximumZoomScale:CGFloat = 10.0
+    public var minimumZoomScale:CGFloat = -1
+    public var zoomScale:CGFloat = 1.0
+    public var blurZoomBackground:Bool = false {
         didSet {
             if blurZoomBackground {
                 createVisualEffectView()
@@ -55,7 +55,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         }
     }
     
-    var enableImageZoom = false {
+    public var enableImageZoom = false {
         didSet {
             if enableImageZoom {
                 setupGestureRecognizer()
