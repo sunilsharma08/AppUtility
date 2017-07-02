@@ -96,6 +96,49 @@ let fixImage:UIImage = image?.fixOrientation()
     alertView.addAction(okButton)
     alertView.show()
 ```
+##### Customisable property
+* ###### Background
+```Swift
+    //Give option to select different background.
+    public var backgroundType:AUBackgroundOptions = .gray
+    /**
+     Enum to describe AlertView background.
+     */
+    public enum AUBackgroundOptions {
+        case blurEffectExtraLight
+        case blurEffectLight
+        case blurEffectDark
+        case dark
+        case gray
+        case none
+    }
+ ```
+ * ###### Show alertview with different animation
+ ```Swift
+    //Animation to show alert.
+    public var alertViewAnimationType:AUAlertAnimationType = .snapBehaviour
+    /**
+     Enum for Alertview presenting animation
+     */
+    public enum AUAlertAnimationType {
+        case snapBehaviour
+        case popUp
+    }
+    
+ ```
+ * ###### Enable/disable alertview dismiss on click of area outside alertview.
+ ```Swift
+    public var dismissOnBackgroundTouch:Bool = true
+ ```
+ * ###### Allow to pan gesture on alertview or not.
+ ```Swift
+    public var isPanGestureEnabled = true
+ ```
+ * ###### Allow to dismiss alertview by flick or not. This work only if `isPanGestureEnabled` is enabled.
+ ```Swift
+    public var shouldDismissAlertViewByFlick = true
+```
+
 ##### Show alertview with just cancel button
 ```Swift
     AUAlertView.showAlertView("Alert title", message: "Message", cancelButtonTitle: "OK")
@@ -103,23 +146,40 @@ let fixImage:UIImage = image?.fixOrientation()
 
 ## AUImageView (UIImageView Utility)
 ```Swift
+    //AUImageView is subclass of UIImageView. Use this class to enable zoom in image view.
     let imageview = AUImageView(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
-    imageview.backgroundColor = UIColor.white
     self.view.addSubview(imageview)
+    
+    //To enable zoom
     imageview.isUserInteractionEnabled = true
     imageview.enableImageZoom = true
-    imageview.blurZoomBackground = false
-    imageview.clipsToBounds = true
-    //imageview.layer.cornerRadius = 100
-    //imageview.image = UIImage(named: "image.jpg")
-    //http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg
-    //http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg
-    imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", withLoadingIndictor: true) { (status) in
-
+    
+    //UIImageView extension to get image with loading indicator.
+    imageview.imageWithURL("http://www.hd-wallpapersdownload.com/download/cute-tiger-pictures-wallpaper-1024x768/",               withLoadingIndictor: true) { (status) in
+    //Check status whether it succeeded to get image or not. `status` will be `true` when succeed to get image and `false`         when it fails to get image.
     }
 ```
-
-## AUButton (UIButton Utility)
+##### Customisable property
+* ###### Maximum zoom scale
+```Swift
+    public var maximumZoomScale:CGFloat = 10.0
+```
+* ###### Minimum zoom scale
+```Swift
+    public var minimumZoomScale:CGFloat = -1
+```
+* ###### Zoom scale
+```Swift
+    public var zoomScale:CGFloat = 1.0
+```
+* ###### Zoom image background
+```Swift
+    public var blurZoomBackground:Bool = false
+```
+* ###### Enable/disable image zoom
+```Swift
+    public var enableImageZoom = false
+```
 
 ## AUDispatchQueueExtension (DispatchQueue Utility)
 
