@@ -131,5 +131,4 @@ extension UIImage {
         let image = UIImage.init(data: imageData ?? Data())
         return image
     }
-    
 }

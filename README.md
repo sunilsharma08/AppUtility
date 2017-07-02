@@ -1,11 +1,16 @@
 # AppUtility
-AppUtility is a library which contains small code snippets that we need in almost every project like converting color hex to rgb, checking internet connectivity, etc.
+AppUtility is collection of useful code snippets that we need in almost every project like getting UIColor from hex code, checking internet connectivity, etc. extensions of Standard struct and classes and subclass of standard classes like UIImageView,String,etc.
+#### Little Theory
+What I found is that several time we have to repeat same steps in every project sometime even in same project and at the end increase development time. So why not we can reduce boilerplate code and make develement little easier by keeping most used methods and some common features that we expect from standard classes. These common methods we need in almost every project like converting color hex to RGB, String height, Image zoom, Internet connection check, etc. 
+
+Some code snippets are taken from  Stackoverflow, Github and some are added by me.
 
 # Installation
 Just drag the folder "AppUtility" with the source files into your project.
 
 # Usage
-## UIColor Utility
+## AUColor (UIColor Utility)
+#### UIColor Extensions
 ```Swift
 //Using direct RGB value no need to divide every time with 255.0
 UIColor.init(redValue: 199, greenValue: 165, blueValue: 247)
@@ -27,7 +32,8 @@ UIColor.init(hexCode: "#ff0000")
 UIColor.init(hexCode: "#f00")
 ```
 
-## NSDate Utility
+## AUDate (Date Utility)
+#### Date Extensions
 ```Swift
 //Getting no. of years between two dates
 let noOfYear = NSDate().yearsFrom(NSDate.init(timeIntervalSince1970: 3000000000))
@@ -50,11 +56,12 @@ let noOfMin = NSDate().minutesFrom(NSDate.init(timeIntervalSince1970: 3000000000
 //Getting no. of seconds between two dates
 let noOfSec = NSDate().secondsFrom(NSDate.init(timeIntervalSince1970: 3000000000))
 
-Getting no. of time between two dates e.g- 2s ago, 1M ago, etc.
+//Getting no. of time between two dates e.g- 2s ago, 1M ago, etc.
 let dateOffsets = NSDate().offsetFrom(NSDate.init(timeIntervalSince1970: 3000000000))
 ```
 
-## UIImage Utility
+## AUImage (UIImage Utility)
+#### UIImage Extensions
 ```Swift
 //Create a image of specified color and size
 let image = UIImage.imageWithColor(UIColor.redColor(), size: CGSizeMake(100, 100))
@@ -74,10 +81,135 @@ let compressedImage:UIImage = image?.compressImage(0.5)
 //Fix for rotating image when using imagePicker
 let fixImage:UIImage = image?.fixOrientation()
 ```
-## Alert messages
+## AUAlertView (Alert message Utility)
 ```Swift
 //Display alert view
-AUAlertMessage().showAlertView("Title", message: "Message", cancelButtonTitle: "Cancel")
+    let alertView = AUAlertView(title: "Alert title", message: "Message")
+    let cancelButton = AUAlertAction(title: "Cancel", style: .cancel) { (action) in
+        print("Clicked on cancel button")
+    }
+
+    let okButton = AUAlertAction(title: "Ok", style: .default) { (action) in
+        print("Clicked on OK button")
+    }
+    alertView.addAction(cancelButton)
+    alertView.addAction(okButton)
+    alertView.show()
+```
+##### Customisable property
+* ###### Background
+```Swift
+    //Give option to select different background.
+    public var backgroundType:AUBackgroundOptions = .gray
+    /**
+     Enum to describe AlertView background.
+     */
+    public enum AUBackgroundOptions {
+        case blurEffectExtraLight
+        case blurEffectLight
+        case blurEffectDark
+        case dark
+        case gray
+        case none
+    }
+ ```
+ * ###### Show alertview with different animation
+ ```Swift
+    //Animation to show alert.
+    public var alertViewAnimationType:AUAlertAnimationType = .snapBehaviour
+    /**
+     Enum for Alertview presenting animation
+     */
+    public enum AUAlertAnimationType {
+        case snapBehaviour
+        case popUp
+    }
+    
+ ```
+ * ###### Enable/disable alertview dismiss on click of area outside alertview.
+ ```Swift
+    public var dismissOnBackgroundTouch:Bool = true
+ ```
+ * ###### Allow to pan gesture on alertview or not.
+ ```Swift
+    public var isPanGestureEnabled = true
+ ```
+ * ###### Allow to dismiss alertview by flick or not. This work only if `isPanGestureEnabled` is enabled.
+ ```Swift
+    public var shouldDismissAlertViewByFlick = true
+```
+
+##### Show alertview with just cancel button
+```Swift
+    AUAlertView.showAlertView("Alert title", message: "Message", cancelButtonTitle: "OK")
+```
+
+## AUImageView (UIImageView Utility)
+```Swift
+    //AUImageView is subclass of UIImageView. Use this class to enable zoom in image view.
+    let imageview = AUImageView(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
+    self.view.addSubview(imageview)
+    
+    //To enable zoom
+    imageview.isUserInteractionEnabled = true
+    imageview.enableImageZoom = true
+    
+    //UIImageView extension to get image with loading indicator.
+    imageview.imageWithURL("http://www.hd-wallpapersdownload.com/download/cute-tiger-pictures-wallpaper-1024x768/",               withLoadingIndictor: true) { (status) in
+    //Check status whether it succeeded to get image or not. `status` will be `true` when succeed to get image and `false`         when it fails to get image.
+    }
+```
+##### Customisable property
+* ###### Maximum zoom scale
+```Swift
+    public var maximumZoomScale:CGFloat = 10.0
+```
+* ###### Minimum zoom scale
+```Swift
+    public var minimumZoomScale:CGFloat = -1
+```
+* ###### Zoom scale
+```Swift
+    public var zoomScale:CGFloat = 1.0
+```
+* ###### Zoom image background
+```Swift
+    public var blurZoomBackground:Bool = false
+```
+* ###### Enable/disable image zoom
+```Swift
+    public var enableImageZoom = false
+```
+
+## AUDispatchQueueExtension (DispatchQueue Utility)
+```Swift
+    // This method will dispatch the `block` to self.
+    // If `self` is the main queue, and current thread is main thread, the block will be invoked immediately instead of being dispatched.
+    DispatchQueue.main.safeAsync {
+        //Code..
+    }
+```
+
+## AULabel (UILabel Utility)
+```Swift
+  //Label with edge insets
+  let auLabel = AULabel.init(frame:CGRect(x: 20, y: 40, width: 50, height: 30))
+  //EdgeInsets to Label
+  auLabel.edgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+  
+  auLabel.text = "hello"
+  self.view.addSubview(auLabel)
+```
+
+## AUReachability (Network Utility)
+Easy way to check internet connection.
+```Swift
+    if AUReachability.sharedInstance.isNetworkReachable() {
+        AUAlertView.showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
+    }
+    else {
+        AUAlertView.showAlertView(nil, message: "Not Connected", cancelButtonTitle: "Cancel")
+    }
 ```
 
 # Contribution

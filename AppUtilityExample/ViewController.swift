@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController,AUAlertMessageDelegate {
-
+class ViewController: UIViewController,UIScrollViewDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         auColorExamples()
@@ -23,12 +23,24 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
     }
     
     func auImageViewExamples() {
-        let imageview = UIImageView.init(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
+        let imageview = AUImageView(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
         imageview.backgroundColor = UIColor.white
         self.view.addSubview(imageview)
-        imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", completionHandler: nil)
+        imageview.isUserInteractionEnabled = true
+        imageview.enableImageZoom = true
+        imageview.blurZoomBackground = false
+        imageview.clipsToBounds = true
+        //imageview.layer.cornerRadius = 100
+        //imageview.image = UIImage(named: "image.jpg")
+        //http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg
+        //http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg
+        imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", withLoadingIndictor: true) { (status) in
+            if !status {
+                imageview.image = UIImage(named: "image.jpg")
+            }
+        }
     }
-
+    
     func auDateExamples() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
@@ -107,10 +119,31 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
     }
 
     func showAlertButtonPressed(_ sender: UIButton) {
-        let aumessage = AUAlertMessage.init(title: "Title", message: "Some message", cancelButtonTitle: "Cancel", otherButtonTitles: "Other","Other2")
-        aumessage.delegate = self
-        aumessage.show()
         
+        let alertView = AUAlertView(title: "Alert title", message: "Message")
+        
+        //Customisation
+        alertView.backgroundType = .blurEffectLight
+        alertView.isPanGestureEnabled = true
+        alertView.dismissOnBackgroundTouch = true
+        alertView.shouldDismissAlertViewByFlick = true
+        
+        let cancelButton = AUAlertAction(title: "Cancel", style: .cancel) { (action) in
+            print("Clicked on cancel button")
+        }
+        
+        let okButton = AUAlertAction(title: "Ok", style: .default) { (action) in
+            print("Clicked on OK button")
+        }
+        let other = AUAlertAction(title: "Other", style: .destructive)
+        alertView.addAction(other)
+        alertView.addAction(cancelButton)
+        alertView.addAction(okButton)
+        alertView.show()
+        
+        //Show alertview with just cancel button
+        //AUAlertView.showAlertView("Alert title", message: "Message", cancelButtonTitle: "OK")
+
     }
     
     func auAlertMessageClickedOn(button: UIButton, index: Int, title: String) {
@@ -142,10 +175,10 @@ class ViewController: UIViewController,AUAlertMessageDelegate {
     func netCheckButtonPressed(_ sender: UIButton) {
         //Checking internet connection
         if AUReachability.sharedInstance.isNetworkReachable() {
-            AUAlertMessage().showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
+            AUAlertView.showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")
         }
         else {
-            AUAlertMessage().showAlertView(nil, message: "Not Connected", cancelButtonTitle: "Cancel")
+            AUAlertView.showAlertView(nil, message: "Not Connected", cancelButtonTitle: "Cancel")
         }
     }
 
