@@ -32,7 +32,7 @@ UIColor.init(hexCode: "#ff0000")
 UIColor.init(hexCode: "#f00")
 ```
 
-## AUDate (NSDate Utility)
+## AUDate (Date Utility)
 #### Date Extensions
 ```Swift
 //Getting no. of years between two dates
@@ -56,7 +56,7 @@ let noOfMin = NSDate().minutesFrom(NSDate.init(timeIntervalSince1970: 3000000000
 //Getting no. of seconds between two dates
 let noOfSec = NSDate().secondsFrom(NSDate.init(timeIntervalSince1970: 3000000000))
 
-Getting no. of time between two dates e.g- 2s ago, 1M ago, etc.
+//Getting no. of time between two dates e.g- 2s ago, 1M ago, etc.
 let dateOffsets = NSDate().offsetFrom(NSDate.init(timeIntervalSince1970: 3000000000))
 ```
 
@@ -84,17 +84,21 @@ let fixImage:UIImage = image?.fixOrientation()
 ## AUAlertView (Alert message Utility)
 ```Swift
 //Display alert view
-let alllert = AUAlertView(title: "Title", message: "Message description")
-let button = AUAlertAction(title: "Cancel", style: .cancel){ (action) in
-    print("Clicked on button \(action.title ?? "title is nil")")
-}
-let button1 = AUAlertAction(title: "Ok", style: .default) { (action) in
-    print("Clicked on button \(action.title ?? "title is nil")")
-}
+    let alertView = AUAlertView(title: "Alert title", message: "Message")
+    let cancelButton = AUAlertAction(title: "Cancel", style: .cancel) { (action) in
+        print("Clicked on cancel button")
+    }
 
-alllert.addAction(button)
-alllert.addAction(button1)
-alllert.show()
+    let okButton = AUAlertAction(title: "Ok", style: .default) { (action) in
+        print("Clicked on OK button")
+    }
+    alertView.addAction(cancelButton)
+    alertView.addAction(okButton)
+    alertView.show()
+```
+##### Show alertview with just cancel button
+```Swift
+    AUAlertView.showAlertView("Alert title", message: "Message", cancelButtonTitle: "OK")
 ```
 
 ## AUImageView (UIImageView Utility)
