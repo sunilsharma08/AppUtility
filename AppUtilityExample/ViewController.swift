@@ -24,17 +24,14 @@ class ViewController: UIViewController,UIScrollViewDelegate {
     
     func auImageViewExamples() {
         let imageview = AUImageView(frame: CGRect(x: 20, y: 350, width: self.view.frame.size.width - 40, height: 200))
-        imageview.backgroundColor = UIColor.white
         self.view.addSubview(imageview)
         imageview.isUserInteractionEnabled = true
         imageview.enableImageZoom = true
-        imageview.blurZoomBackground = false
-        imageview.clipsToBounds = true
-        //imageview.layer.cornerRadius = 100
-        //imageview.image = UIImage(named: "image.jpg")
+        
         //http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg
         //http://swmini.hu/wp-content/uploads/2016/11/2WYfLt.jpg
-        imageview.imageWithURL("http://www.hdwallpapers.in/download/city_of_arts_and_sciences_valencia_spain-1280x800.jpg", withLoadingIndictor: true) { (status) in
+        
+        imageview.imageWithURL("http://www.hd-wallpapersdownload.com/download/cute-tiger-pictures-wallpaper-1024x768/", withLoadingIndictor: true) { (status) in
             if !status {
                 imageview.image = UIImage(named: "image.jpg")
             }
@@ -123,6 +120,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         let alertView = AUAlertView(title: "Alert title", message: "Message")
         
         //Customisation
+        alertView.alertViewAnimationType = .popUp
         alertView.backgroundType = .blurEffectLight
         alertView.isPanGestureEnabled = true
         alertView.dismissOnBackgroundTouch = true

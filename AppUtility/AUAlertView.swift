@@ -60,9 +60,10 @@ open class AUAlertView: UIView {
     //Enable/disable alertview dismiss on click of area outside alertview.
     public var dismissOnBackgroundTouch:Bool = true
     
-    //Give option to select different alertview background.
+    //Give option to select different background.
     public var backgroundType:AUBackgroundOptions = .gray
     
+    //Animation to show alert.
     public var alertViewAnimationType:AUAlertAnimationType = .snapBehaviour
     
     //Allow to dismiss alertview by flick or not. This work only if `isPanGestureEnabled` is enabled.
