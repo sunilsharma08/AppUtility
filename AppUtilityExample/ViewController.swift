@@ -115,7 +115,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         self.view.addSubview(showAlertButton)
     }
 
-    func showAlertButtonPressed(_ sender: UIButton) {
+    @objc func showAlertButtonPressed(_ sender: UIButton) {
         
         let alertView = AUAlertView(title: "Alert title", message: "Message")
         
@@ -170,7 +170,7 @@ class ViewController: UIViewController,UIScrollViewDelegate {
         self.view.addSubview(netCheckButton)
     }
 
-    func netCheckButtonPressed(_ sender: UIButton) {
+    @objc func netCheckButtonPressed(_ sender: UIButton) {
         //Checking internet connection
         if AUReachability.sharedInstance.isNetworkReachable() {
             AUAlertView.showAlertView(nil, message: "Connected", cancelButtonTitle: "Cancel")

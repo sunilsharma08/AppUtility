@@ -183,7 +183,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
-    func orientationChanged (notification: NSNotification) {
+    @objc func orientationChanged (notification: NSNotification) {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState], animations: {[weak self] in
             self?.zoomScrollView.frame = UIScreen.main.bounds
             if let scrollView = self?.zoomScrollView {
@@ -192,7 +192,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         }, completion: nil)
     }
     
-    func presentAnimation(_ imageView:UIImageView, completion: ((Void) -> Void)? = nil) {
+    func presentAnimation(_ imageView:UIImageView, completion: (() -> Void)? = nil) {
         addDeviceRotationNotification()
         imageView.isHidden = true
         imageView.alpha = 0.0
@@ -232,7 +232,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         })
     }
     
-    func dismissAnimation(completion: ((Void) -> Void)? = nil) {
+    func dismissAnimation(completion: (() -> Void)? = nil) {
         updateStatusBarToPreviousState()
         removeDeviceRotationNotification()
         let imageView = self.zoomScrollView.viewWithTag(10204)
@@ -263,7 +263,7 @@ class AUImageView: UIImageView,UIScrollViewDelegate {
         }
     }
     
-    func closeZoomView(sender:UIButton) {
+    @objc func closeZoomView(sender:UIButton) {
         dismissAnimation(completion: nil)
     }
     
