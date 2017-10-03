@@ -601,7 +601,7 @@ open class AUAlertView: UIView {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
     }
     
-    func orientationChanged (notification: NSNotification) {
+    @objc func orientationChanged (notification: NSNotification) {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .beginFromCurrentState], animations: {[weak self] in
             if let keyWindow = UIApplication.shared.keyWindow {
                 self?.animator?.removeAllBehaviors()
