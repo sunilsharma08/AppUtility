@@ -10,7 +10,7 @@ import Foundation
 import SystemConfiguration
 
 open class AUReachability:NSObject {
-    open static let sharedInstance = AUReachability()
+    public static let sharedInstance = AUReachability()
     fileprivate override init() {}
     
     // whether the network is reachable or not
