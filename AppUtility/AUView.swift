@@ -13,6 +13,11 @@ extension UIView
     func copyView<T: UIView>() -> T? {
         return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as? T
     }
+
+  func courner(with radius: CGFloat) {
+    self.clipsToBounds = true
+    self.layer.cornerRadius = radius
+  }
 }
 
 /*class AUView: UIView {
