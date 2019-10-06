@@ -14,7 +14,7 @@ extension UIView
         return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as? T
     }
 
-  func courner(with radius: CGFloat) {
+  func corner(with radius: CGFloat) {
     self.clipsToBounds = true
     self.layer.cornerRadius = radius
   }
